@@ -2,6 +2,7 @@
 import clsx from 'clsx'
 import styles from './header.module.sass'
 import React, { useState } from 'react'
+import Image from 'next/image'
 
 const Header = () => {
   const [scroll, setScroll] = useState(0)
@@ -21,7 +22,7 @@ const Header = () => {
         <div className="container">
           <div className={styles.header__content}>
             <div className={styles.header__logo}>
-              <h1>LOGO</h1>
+              <Image src="/logo/logo.png" width={100} height={50} alt="cars from USA" />
             </div>
             <nav className={styles.header__nav}>
               <div className={styles.number_phones}>
