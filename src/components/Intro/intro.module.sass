@@ -1,0 +1,111 @@
+.intro
+  background-color: #FADB5F
+  padding: 50px 0
+
+.intro__inner
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  align-items: center
+  gap: 20px
+
+.inner__searching__block
+  height: 448px
+  background-color: #fff
+  border-radius: 6px
+  width: 40%
+  box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 7px 0 15px -4px rgba(0, 0, 0, 0.3), -7px 0 15px -4px rgba(0, 0, 0, 0.3)
+
+.searching__content
+  display: flex
+  flex-direction: column
+  gap: 23px
+  padding: 32px
+  height: 100%
+
+.input__options
+  position: relative
+  width: 100%
+  height: 55px
+  transition: all 0.3s ease
+
+.select__options
+  transition: all 0.3s ease
+  color: #8c8c8c
+  padding: 0 15px
+  width: 100%
+  height: 100%
+  border-radius: 6px
+  font-size: 24px
+  font-weight: 700
+  border: solid 2px #efe9e9
+  &:hover
+    border: solid 2px #202124
+    color: #202124
+  &:focus
+    color: #202124
+
+.years
+  display: flex
+  flex-direction: row
+  height: 55px
+  gap: 10px
+  & .select__options
+    font-size: 18px
+
+.slider__cars
+  min-width: 0px
+  max-width: 57%
+  width: 100%
+  overflow: hidden
+
+.btn_search
+  position: relative
+  display: flex
+  justify-content: center
+  align-items: center
+  border-radius: 6px
+  background: #202124
+  font-family: "Montserrat", sans-serif
+  box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2)
+  overflow: hidden
+  border: none
+
+  &:after
+    content: " "
+    width: 0%
+    height: 100%
+    background: #FFD401
+    position: absolute
+    transition: all 0.4s ease-in-out
+    right: 0
+
+  &:hover::after
+    right: auto
+    left: 0
+    width: 100%
+
+  span
+    text-align: center
+    text-decoration: none
+    width: 100%
+    padding: 18px 25px
+    color: #fff
+    font-size: 20px
+    font-weight: 700
+    z-index: 20
+    transition: all 0.3s ease-in-out
+
+  &:hover span
+    color: #202124
+    animation: scaleUp 0.3s ease-in-out
+
+@keyframes scaleUp
+  0%
+    transform: scale(1)
+
+  50%
+    transform: scale(0.95)
+
+  100%
+    transform: scale(1)

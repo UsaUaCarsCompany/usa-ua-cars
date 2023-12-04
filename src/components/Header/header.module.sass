@@ -1,0 +1,135 @@
+.header
+  padding: 25px 0
+  border-bottom: 1px solid #fff
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  z-index: 10
+  -webkit-transition: padding .2s linear, background-color .2s linear, border .2s linear
+  -o-transition: padding .2s linear, background-color .2s linear, border .2s linear
+  transition: padding .2s linear, background-color .2s linear, border .2s linear
+  background-color: #202124
+
+.headerBg
+  background-color: rgb(32, 33, 36)
+  padding: 15px 0
+  border: none
+
+@media (max-width: 991px)
+  .header
+    padding: 15px 0
+
+@media (max-width: 610px)
+  .header
+    padding: 10px 0
+
+.header__content
+  position: relative
+  display: -webkit-box
+  display: -ms-flexbox
+  display: flex
+  -webkit-box-pack: justify
+  -ms-flex-pack: justify
+  justify-content: space-between
+  -webkit-box-align: center
+  -ms-flex-align: center
+  align-items: center
+
+.header__logo
+  display: -webkit-box
+  display: -ms-flexbox
+  display: flex
+  -webkit-box-align: center
+  -ms-flex-align: center
+  align-items: center
+  color: #fff
+  font-size: 36px
+
+.header__nav
+  display: flex
+  flex-direction: column
+  gap: 25px
+
+.number_phones
+  display: flex
+  flex-direction: row
+  justify-content: flex-end
+  gap: 10px
+  & span
+    color: #FADB5F
+    font-weight: 700
+
+.nav__items
+  display: flex
+  flex-direction: row
+  align-items: center
+  gap: 15px
+
+.item__nav
+  font-weight: 700
+  transition: all 0.3s ease
+  padding: 8px 10px
+  position: relative
+  transition: all 0.3s ease 0s
+  &::after
+    position: absolute
+    content: ""
+    width: 100%
+    height: 2px
+    bottom: 0%
+    left: -70%
+    background-color: #FADB5F
+    transition: all 0.3s ease 0s
+    opacity: 0
+  &:hover::after
+    left: 0%
+    opacity: 1
+  &:hover
+    color: #FADB5F
+
+.active
+  color: #FADB5F
+  &::after
+    left: 0%
+    opacity: 1
+
+.button
+  display: inline-block
+  padding: .75rem 1.25rem
+  border-radius: 6px
+  color: #fff
+  text-transform: uppercase
+  font-size: 1rem
+  letter-spacing: .15rem
+  transition: all .3s
+  position: relative
+  overflow: hidden
+  z-index: 1
+  &:after
+    content: ''
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: #FADB5F
+    border-radius: 6px
+    z-index: -2
+
+  &:before
+    content: ''
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 0%
+    height: 100%
+    background-color: darken(#FADB5F, 15%)
+    transition: all .3s
+    border-radius: 6px
+    z-index: -1
+
+  &:hover
+    color: #fff
+    &:before
+      width: 100%
