@@ -28,7 +28,15 @@ export const BurgerMenu = ({ activeBurger, setActiveBurger }: BurgerMenuProps) =
       <div className={clsx(styles.burger_window, activeBurger ? styles.burger_window_show : '')}>
         <div className={styles.burger_menu_header}>
           {/* header */}
-          <Link className={styles.header__logo} to="main" spy={true} smooth={true} offset={-180} duration={600}>
+          <Link
+            onClick={handleCloseBurgerMenu}
+            className={styles.header__logo}
+            to="main"
+            spy={true}
+            smooth={true}
+            offset={-180}
+            duration={600}
+          >
             <Image src="/logo/logo.png" width={100} height={50} alt="cars from USA" />
           </Link>
           <button className={styles.burger_close} onClick={handleCloseBurgerMenu}>
