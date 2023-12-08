@@ -6,7 +6,7 @@ const Intro = () => {
   return (
     <>
       <div className={styles.wrapp}>
-        <section className={styles.intro}>
+        <section className={styles.intro} id="main">
           <div className="container">
             <div className={styles.intro__inner}>
               <div className={styles.inner__searching__block}>

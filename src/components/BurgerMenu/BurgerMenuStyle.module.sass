@@ -1,0 +1,115 @@
+//! VISIBLE BURGERMENU ==============
+.burger_holder
+  position: fixed
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  background-color: #00000080
+  transition: all 0.5s ease
+  z-index: 1000
+  opacity: 0
+  visibility: hidden
+
+.show_burger
+  opacity: 1
+  visibility: visible
+
+.burger_window
+  display: flex
+  flex-direction: column
+  background-color: #202124
+  width: 100%
+  max-width: 320px
+  max-height: 100%
+  height: 100%
+  position: fixed
+  top: 0
+  pointer-events: auto
+  z-index: 1000
+  overflow-y: auto
+  box-shadow: 2px 0 6px #33333342
+  transition: all 1s ease
+  visibility: hidden
+  right: -50%
+
+.burger_window_show
+  visibility: visible
+  right: 0 !important
+
+@media( max-width: 665px  )
+  .burger_window
+    max-width: none
+    right: -100%
+
+  .item__nav a
+    justify-content: center !important
+
+//! VISIBLE BURGERMENU ==============
+
+//? CONTENT ==================
+---------------------------------------------------------
+.burger_menu_header
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: space-between
+  height: 100px
+  padding: 0 25px
+
+.header__logo
+  width: 100px
+  height: auto
+  & img
+    width: 100%
+    height: 100%
+
+.burger_close
+  background: none
+  font-size: 30px
+  border: none
+  color: #fff
+  cursor: pointer
+  transition: all 0.3s ease
+  &:hover
+    color: #FADB5F
+
+.nav_menu
+  padding: 50px 25px
+
+.nav__items
+  display: flex
+  flex-direction: column
+  gap: 50px
+  font-size: 25px
+
+.item__nav a
+  color: #fff
+  position: relative
+  display: flex
+  align-items: center
+  justify-content: flex-end
+  transition: all 0.2s ease
+  &::after
+    position: absolute
+    content: ""
+    width: 100%
+    height: 2px
+    bottom: -5px
+    left: -100%
+    background-color: #FADB5F
+    transition: all 0.3s ease 0s
+    opacity: 0
+  &:hover::after
+    left: 0%
+    opacity: 1
+  &:hover
+    color: #FADB5F
+
+.item__nav .active::after
+  left: 0%
+  opacity: 1
+
+.item__nav .active
+  color: #FADB5F
+//? CONTENT ==================

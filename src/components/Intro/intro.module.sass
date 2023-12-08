@@ -17,7 +17,9 @@
   height: 448px
   background-color: #fff
   border-radius: 6px
-  width: 40%
+  max-width: 40%
+  min-width: 0%
+  width: 100%
   box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 7px 0 15px -4px rgba(0, 0, 0, 0.3), -7px 0 15px -4px rgba(0, 0, 0, 0.3)
 
 .searching__content
@@ -120,3 +122,28 @@
   border-right: 37px solid transparent
   border-top: 37px solid #FADB5F
   margin: 0 auto
+  margin-top: -1px
+
+@media (max-width: 1000px)
+  .intro__inner
+    flex-direction: column-reverse
+    gap: 30px
+
+  .inner__searching__block
+    max-width: 100%
+
+  .slider__cars
+    max-width: 100%
+
+@media (max-width: 490px)
+  .select__options
+    font-size: 18px
+
+  .years .select__options
+    font-size: 16px
+
+  .inner__searching__block
+    height: auto
+
+  .searching__content
+    padding: 16px
