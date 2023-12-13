@@ -6,10 +6,12 @@ import { Link } from 'react-scroll'
 import Image from 'next/image'
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu'
 import { HeaderLinks, HeaderLinksProps } from '@/data/HeaderLinks'
+import ContactPopup from '../ContactPopup/ContactPopup'
 
 const Header = () => {
   const [scroll, setScroll] = useState(0)
   const [activeBurger, setActiveBurger] = useState(false)
+  const [openContact, setOpenContact] = useState(false)
 
   const handleScroll = () => {
     setScroll(window.scrollY)
@@ -20,6 +22,11 @@ const Header = () => {
     setActiveBurger(true)
   }
 
+  const openContactPopup = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault()
+    setOpenContact(true)
+  }
+
   React.useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -27,6 +34,7 @@ const Header = () => {
 
   return (
     <>
+      <ContactPopup openContact={openContact} setOpenContact={setOpenContact} />
       <BurgerMenu activeBurger={activeBurger} setActiveBurger={setActiveBurger} />
       <header className={clsx(styles.header, scroll < 50 ? '' : styles.headerBg)}>
         <div className="container">
@@ -51,6 +59,9 @@ const Header = () => {
                     </Link>
                   </li>
                 ))}
+                <button className={styles.btn_contact} onClick={openContactPopup}>
+                  <span>Свяжитесь с нами</span>
+                </button>
                 <button
                   className={clsx(styles.nav_menu_burger, activeBurger ? styles.nav_menu_burger_active : '')}
                   type="button"

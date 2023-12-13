@@ -1,3 +1,4 @@
+import Consultation from '@/components/Consultation/page'
 import HowWeWork from '@/components/HowWeWork/page'
 import Intro from '@/components/Intro/page'
 const Home = () => {
@@ -5,6 +6,7 @@ const Home = () => {
     <main className="content">
       <Intro />
       <HowWeWork />
+      <Consultation />
     </main>
   )
 }

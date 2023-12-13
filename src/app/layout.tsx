@@ -23,7 +23,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-        <script src="https://kit.fontawesome.com/699e6f5ea8.js" crossOrigin="anonymous" />
       </Head>
       <body>
         <div className="wrapper">
