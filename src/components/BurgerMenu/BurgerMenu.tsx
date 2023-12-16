@@ -14,6 +14,7 @@ type BurgerMenuProps = {
 export const BurgerMenu = ({ activeBurger, setActiveBurger }: BurgerMenuProps) => {
   const handleCloseBurgerMenu = () => {
     setActiveBurger(false)
+    document.body.style.overflow = 'auto'
   }
 
   return (

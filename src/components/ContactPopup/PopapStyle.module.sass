@@ -32,14 +32,234 @@
   visibility: hidden
   transform: translate(-50%, -30%) scale(0)
   z-index: 1000
-  padding: 20px
+  padding: 20px 30px
+  overflow: auto
 
 .show_window
   visibility: visible
   transform: translate(-50%, -50%) scale(1)
 
+.modal_header
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  margin-bottom: 15px
+
+.modal_close
+  padding: 5px 10px
+  background: none
+  font-size: 16px
+  border: none
+  color: #fff
+  cursor: pointer
+  transition: all 0.3s ease
+  box-shadow: 0px 0px 4px 0px rgba(250, 219, 95, 0.75)
+  border-radius: 6px
+  width: max-content
+  font-weight: 700
+  &:hover
+    background: #fbe441
+    color: #202124
+
 //! VISIBLE POPAP ======================
 
 //? CONTENT ==================
+.content_title
+  display: flex
+  flex-direction: column
+  gap: 10px
+  text-align: center
+  margin-bottom: 30px
+
+.inputs_inner
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+.inputs_form
+  display: flex
+  flex-direction: column
+  gap: 25px
+  width: 55%
+
+.input_block
+  display: flex
+  flex-direction: column
+  gap: 6px
+  & label
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 6px
+    font-size: 13px
+    color: #9b9b9b
+    & svg
+      font-size: 20px
+      color: #9b9b9b
+
+.input__field
+  font-family: inherit
+  width: 100%
+  border: 0
+  border-bottom: 2px solid #9b9b9b
+  outline: 0
+  font-size: 16px
+  color: #FFF
+  padding: 7px 0
+  background: transparent
+  transition: all 0.5s ease
+  &:focus
+    border-bottom: 2px solid #fbe441
+  &:focus::placeholder
+    transition: all 0.5s ease
+    transform: translate(-150px)
+  &:hover
+    border-bottom: 2px solid #fbe441
+
+.input__field_area
+  font-family: inherit
+  width: 100%
+  border: 0
+  border-bottom: 2px solid #9b9b9b
+  outline: 0
+  font-size: 16px
+  color: #FFF
+  padding: 7px 0
+  background: transparent
+  transition: all 0.5s ease
+  min-height: 80px
+  &:focus
+    border-bottom: 2px solid #fbe441
+  &:focus::placeholder
+    transition: all 0.5s ease
+    transform: translate(-150px)
+  &:hover
+    border-bottom: 2px solid #fbe441
+
+.btn_contact
+  position: relative
+  display: flex
+  justify-content: center
+  align-items: center
+  border-radius: 6px
+  background: #fbe441
+  -webkit-box-shadow: 0px 0px 14px 0px rgba(250, 219, 95, 0.75)
+  -moz-box-shadow: 0px 0px 14px 0px rgba(250, 219, 95, 0.75)
+  box-shadow: 0px 0px 14px 0px rgba(250, 219, 95, 0.75)
+  overflow: hidden
+  border: none
+  &:hover
+    box-shadow: 0px 0px 4px 0px rgba(250, 219, 95, 0.75)
+
+  &:after
+    content: " "
+    width: 0%
+    height: 100%
+    background: #202124
+    position: absolute
+    transition: all 0.4s ease-in-out
+    right: 0
+
+  &:hover::after
+    right: auto
+    left: 0
+    width: 100%
+
+  span
+    text-align: center
+    text-decoration: none
+    width: 100%
+    padding: 14px 16px
+    color: #202124
+    font-size: 16px
+    font-weight: 700
+    z-index: 5
+    transition: all 0.3s ease-in-out
+
+  &:hover span
+    color: #fff
+    animation: scaleUp 0.3s ease-in-out
+
+@keyframes scaleUp
+  0%
+    transform: scale(1)
+
+  50%
+    transform: scale(0.95)
+
+  100%
+    transform: scale(1)
+
+.devider_block
+  position: relative
+  display: flex
+  flex-direction: column
+  align-items: center
+  margin: 0 30px
+  justify-content: center
+  & .devider
+    width: 1px
+    min-height: 100%
+  & span
+    position: absolute
+    top: 45%
+    background-color: #202124
+    padding: 5px
+
+.contact_socials
+  display: flex
+  flex-direction: column
+  width: 45%
+  & h4
+    text-align: center
 ---------------------------------------------------------
+.socails_list
+  margin-top: 20px
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  gap: 20px
+
+.list_link
+  display: flex
+  flex-direction: column
+  width: 100%
+  align-items: center
+  gap: 15px
+
+.link_item
+  transition: all 0.3s ease
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  width: 45px
+  height: 45px
+  border-radius: 50%
+  box-shadow: 0px 0px 5px 0px rgba(255, 255, 255, 1)
+  &:hover
+    box-shadow: 0px 0px 14px 0px rgb(255, 255, 255)
+    transform: scale(1.1)
+
 //? CONTENT ==================
+
+@media (max-width: 600px)
+  .inputs_inner
+    gap: 25px
+    flex-direction: column
+    & .inputs_form
+      width: 100%
+
+  .devider_block hr
+    width: 100% !important
+
+  .devider_block span
+    top: -14%
+
+  .contact_socials
+    width: 100%
+
+  .socails_list
+    margin-top: 40px
+    flex-direction: row

@@ -20,12 +20,16 @@ const Header = () => {
   const openBurgerMenu = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     setActiveBurger(true)
+    document.body.style.overflow = 'hidden'
   }
 
   const openContactPopup = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     setOpenContact(true)
+    document.body.style.overflow = 'hidden'
   }
+
+  const handleCloseContactPopup = () => {}
 
   React.useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -43,14 +47,6 @@ const Header = () => {
               <Image src="/logo/logo.png" width={100} height={50} alt="cars from USA" />
             </Link>
             <nav className={styles.header__nav}>
-              <div className={styles.number_phones}>
-                <div>
-                  <span>LIFE:</span> +38 093 099 60 62
-                </div>
-                <div>
-                  <span>КИЕВСТАР:</span> +38 096 099 60 62
-                </div>
-              </div>
               <ul className={styles.nav__items}>
                 {HeaderLinks.map(({ id, name, href }: HeaderLinksProps) => (
                   <li key={id} className={clsx(styles.item__nav)}>
