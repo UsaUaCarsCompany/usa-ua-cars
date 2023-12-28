@@ -15,7 +15,7 @@ export async function POST(req:NextRequest) {
       const data = await resend.emails.send({
       from: 'onboarding@resend.dev',
       to: 'linetsky.yura@gmail.com',
-      subject: 'Клієнт хоче зв`язатися з вами',
+      subject: `Клієнт на імя ${name} хоче звязатися з вами`,
       html: `<h1>Contact Form Data:</h1>
       <p>Name: ${name}</p>
       <p>Email: ${email}</p>
