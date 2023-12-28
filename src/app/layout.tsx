@@ -6,7 +6,7 @@ import Head from 'next/head'
 import Header from '@/components/Header/page'
 
 export const metadata = {
-  title: 'Car from Us',
+  title: 'Car from USA',
   description: 'Discover & Share AI Prompts',
   icons: {
     icon: {

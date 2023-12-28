@@ -5,17 +5,89 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faEnvelope, faPhone, faMessage } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
 import { SocialsData, SocialsDataProps } from '@/data/SocialsData'
+import { Resend } from 'resend'
 
 type ContactPopupProps = {
   openContact: boolean
   setOpenContact: (isOpenContact: boolean) => void
 }
 
+type formDataProps = {
+  name: string
+  email: string
+  phone: string
+  message: string
+}
+
 const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  })
+
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }
+
   const handleCloseContactPopup = () => {
     setOpenContact(false)
     document.body.style.overflow = 'auto'
   }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    try {
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        console.log('Email sent successfully!')
+        // Опціонально: додати код для відображення повідомлення про успішну відправку форми
+      } else {
+        console.error('Error sending email:', response.statusText)
+        // Опціонально: додати код для відображення повідомлення про помилку відправки форми
+      }
+    } catch (error) {
+      console.error('Error sending email:', error)
+      // Опціонально: додати код для відображення повідомлення про помилку відправки форми
+    }
+  }
+
+  // async function send(formData: formDataProps) {
+  //   try {
+  //     const resend = new Resend('re_4ZLxmRDG_4GX8uWLkbxQBsdHwi9r6k8aG')
+  //     const { data } = await resend.emails.send({
+  //       from: 'onboarding@resend.dev',
+  //       to: 'linetsky.yura@gmail.com',
+  //       subject: 'Contact Form Submission',
+  //       html: `<h1>Contact Form Data:</h1>
+  //       <p>Name: ${formData.name}</p>
+  //       <p>Email: ${formData.email}</p>
+  //       <p>Phone: ${formData.phone}</p>
+  //       <p>Message: ${formData.message}</p>`,
+  //     })
+
+  //     console.log('Email sent successfully!', data)
+
+  //     // Optionally handle success (e.g., display a success message)
+  //   } catch (error) {
+  //     console.error('Error sending email:', error)
+
+  //     // Optionally handle error (e.g., display an error message)
+  //   }
+  // }
 
   return (
     <>
@@ -42,36 +114,67 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
             </p>
           </div>
           <div className={styles.inputs_inner}>
-            <form className={styles.inputs_form}>
+            <form onSubmit={handleSubmit} className={styles.inputs_form}>
               <div className={styles.input_block}>
                 <label className={styles.input_label}>
                   <FontAwesomeIcon icon={faUser} />
                   Как к вам обращаться?
                 </label>
-                <input type="text" placeholder="Sonic" required className={styles.input__field} />
+                <input
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  type="text"
+                  placeholder="Sonic"
+                  name="name"
+                  required
+                  className={styles.input__field}
+                />
               </div>
               <div className={styles.input_block}>
                 <label className={styles.input_label}>
                   <FontAwesomeIcon icon={faEnvelope} />
                   Емайл
                 </label>
-                <input type="Email" placeholder="example@gmail.com" required className={styles.input__field} />
+                <input
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  type="Email"
+                  placeholder="example@gmail.com"
+                  required
+                  className={styles.input__field}
+                />
               </div>
               <div className={styles.input_block}>
                 <label className={styles.input_label}>
                   <FontAwesomeIcon icon={faPhone} />
                   Телефон
                 </label>
-                <input type="tel" placeholder="+380630000000" required className={styles.input__field} />
+                <input
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  type="tel"
+                  name="phone"
+                  placeholder="+380630000000"
+                  required
+                  className={styles.input__field}
+                />
               </div>
               <div className={styles.input_block}>
                 <label className={styles.input_label}>
                   <FontAwesomeIcon icon={faMessage} />
                   Cообщения
                 </label>
-                <textarea placeholder="Ваше сообщение" required className={styles.input__field_area} />
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  placeholder="Ваше сообщение"
+                  required
+                  className={styles.input__field_area}
+                />
               </div>
-              <button className={styles.btn_contact}>
+              <button type="submit" className={styles.btn_contact}>
                 <span>Отправить</span>
               </button>
             </form>
