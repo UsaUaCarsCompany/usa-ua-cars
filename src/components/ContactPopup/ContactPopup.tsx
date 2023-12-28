@@ -65,30 +65,6 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
     }
   }
 
-  // async function send(formData: formDataProps) {
-  //   try {
-  //     const resend = new Resend('re_4ZLxmRDG_4GX8uWLkbxQBsdHwi9r6k8aG')
-  //     const { data } = await resend.emails.send({
-  //       from: 'onboarding@resend.dev',
-  //       to: 'linetsky.yura@gmail.com',
-  //       subject: 'Contact Form Submission',
-  //       html: `<h1>Contact Form Data:</h1>
-  //       <p>Name: ${formData.name}</p>
-  //       <p>Email: ${formData.email}</p>
-  //       <p>Phone: ${formData.phone}</p>
-  //       <p>Message: ${formData.message}</p>`,
-  //     })
-
-  //     console.log('Email sent successfully!', data)
-
-  //     // Optionally handle success (e.g., display a success message)
-  //   } catch (error) {
-  //     console.error('Error sending email:', error)
-
-  //     // Optionally handle error (e.g., display an error message)
-  //   }
-  // }
-
   return (
     <>
       {/* Задній план ============= */}
