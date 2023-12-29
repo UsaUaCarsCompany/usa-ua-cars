@@ -5,21 +5,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faEnvelope, faPhone, faMessage } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
 import { SocialsData, SocialsDataProps } from '@/data/SocialsData'
-import { Resend } from 'resend'
+import { ToastContainer, toast } from 'react-toastify'
 
 type ContactPopupProps = {
   openContact: boolean
   setOpenContact: (isOpenContact: boolean) => void
 }
 
-type formDataProps = {
-  name: string
-  email: string
-  phone: string
-  message: string
-}
-
 const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
+  const [sendLoading, setSendLoading] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -42,6 +36,7 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setSendLoading(true)
 
     try {
       const response = await fetch('/api/send', {
@@ -55,6 +50,19 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
       if (response.ok) {
         console.log('Email sent successfully!')
         // Опціонально: додати код для відображення повідомлення про успішну відправку форми
+        setFormData({ name: '', email: '', phone: '', message: '' })
+        setSendLoading(false)
+        handleCloseContactPopup()
+        toast.success('Сообщение отправилось успешно!', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+        })
       } else {
         console.error('Error sending email:', response.statusText)
         // Опціонально: додати код для відображення повідомлення про помилку відправки форми
@@ -67,6 +75,18 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       {/* Задній план ============= */}
       <div
         className={clsx(styles.modal_holder, openContact ? styles.show_holder : '')}
@@ -150,9 +170,15 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
                   className={styles.input__field_area}
                 />
               </div>
-              <button type="submit" className={styles.btn_contact}>
-                <span>Отправить</span>
-              </button>
+              {sendLoading ? (
+                <div className="loader__inner">
+                  <div className="loader"></div>
+                </div>
+              ) : (
+                <button type="submit" className={styles.btn_contact}>
+                  <span>Отправить</span>
+                </button>
+              )}
             </form>
             <div className={styles.devider_block}>
               <span>или</span>

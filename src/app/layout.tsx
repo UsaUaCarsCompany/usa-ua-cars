@@ -1,6 +1,7 @@
 import '../styles/globalReset.sass'
 import '../styles/globals.sass'
 import '../components/Intro/CarsSliderStyles.sass'
+import 'react-toastify/dist/ReactToastify.css'
 
 import Head from 'next/head'
 import Header from '@/components/Header/page'
