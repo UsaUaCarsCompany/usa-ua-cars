@@ -1,0 +1,142 @@
+.popCars__block
+  padding: 40px 0
+  background-color: #fbe441
+
+.container__inner
+  display: flex
+  flex-direction: column
+  gap: 30px
+
+.inner__title
+  display: flex
+  flex-direction: column
+  font-size: 30px
+  font-weight: 700
+
+.popCars__list
+  display: flex
+  justify-content: space-between
+  flex-direction: row
+  gap: 20px
+
+.list__cars__cards
+  display: flex
+  flex-direction: column
+  background-color: #fff
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15)
+  border-radius: 4px
+  max-width: 50%
+  width: 100%
+  transition: all 0.5s ease
+  &:hover .extra__info
+    bottom: 0
+  &:hover .cars__header__block img
+    transition: all 0.5s ease
+    transform: translateY(-270px)
+
+.cars__header__block
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  border-radius: 4px
+  position: relative
+  overflow: hidden
+  background-color: #eaeaea
+  height: 270px
+  padding: 20px
+  transition: all 0.5s ease
+  & img
+    transition: all 0.5s ease
+    display: block
+    max-width: 370px
+    width: 100%
+    height: auto
+    transform: translateY(0px)
+
+.extra__info
+  transition: all 0.5s ease
+  position: absolute
+  color: #000
+  background-color: #fff
+  height: 100%
+  padding: 20px
+  bottom: -270px
+
+.cars__content
+  padding: 20px
+  display: flex
+  flex-direction: column
+  justify-content: center
+  gap: 20px
+  height: 129px
+
+.content__header
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: space-between
+  color: #000
+
+.content__btn__want
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: flex-end
+
+.btn__want
+  position: relative
+  display: flex
+  justify-content: center
+  align-items: center
+  border-radius: 6px
+  background: #fbe441
+  -webkit-box-shadow: 0px 0px 14px 0px rgba(250, 219, 95, 0.75)
+  -moz-box-shadow: 0px 0px 14px 0px rgba(250, 219, 95, 0.75)
+  box-shadow: 0px 0px 14px 0px rgba(250, 219, 95, 0.75)
+  overflow: hidden
+  border: none
+  &:hover
+    box-shadow: 0px 0px 4px 0px rgba(250, 219, 95, 0.75)
+  &:after
+    content: " "
+    width: 0%
+    height: 100%
+    background: #202124
+    position: absolute
+    transition: all 0.4s ease-in-out
+    right: 0
+  &:hover::after
+    right: auto
+    left: 0
+    width: 100%
+  span
+    text-align: center
+    text-decoration: none
+    width: 100%
+    padding: 14px 16px
+    color: #202124
+    font-size: 16px
+    font-weight: 700
+    z-index: 5
+    transition: all 0.3s ease-in-out
+  &:hover span
+    color: #fff
+    animation: scaleUp 0.3s ease-in-out
+
+@keyframes scaleUp
+  0%
+    transform: scale(1)
+
+  50%
+    transform: scale(0.95)
+
+  100%
+    transform: scale(1)
+
+@media (max-width: 768px)
+  .popCars__list
+    flex-direction: column
+
+  .list__cars__cards
+    max-width: 100%

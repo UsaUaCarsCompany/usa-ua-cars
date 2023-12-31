@@ -29,8 +29,6 @@ const Header = () => {
     document.body.style.overflow = 'hidden'
   }
 
-  const handleCloseContactPopup = () => {}
-
   React.useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
