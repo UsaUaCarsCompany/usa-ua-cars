@@ -34,6 +34,7 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
     document.body.style.overflow = 'auto'
   }
 
+  //!! POST METHOD SENDING EMAIL
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setSendLoading(true)
