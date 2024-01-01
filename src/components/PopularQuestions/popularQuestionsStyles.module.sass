@@ -1,0 +1,89 @@
+.questions__block
+  padding: 40px 0
+
+.container__inner
+  display: flex
+  flex-direction: column
+  gap: 20px
+
+.questions__accordions
+  display: flex
+  flex-direction: column
+  gap: 30px
+
+//! ACCORDION
+.accordion__block
+  transition: all 0.3s ease
+  padding: 15px 0
+  border-bottom: 1px solid #ffffff
+
+.accordion__block__active
+  transition: all 0.3s ease
+  border-bottom: 1px solid #fbe441
+
+.inner__title
+  display: flex
+  flex-direction: column
+  gap: 20px
+  font-size: 30px
+  & span
+    height: 4px
+    width: 135px
+    display: block
+    background-color: #fbe441
+
+.accordion_heading
+  cursor: pointer
+  display: flex
+  align-items: center
+  justify-content: space-between
+  & h3
+    font-size: 28px
+
+.accordion_icon
+  align-items: center
+  padding: 0
+  display: flex
+  justify-content: flex-end
+  background: none
+  outline: none
+  border: 0
+  color: #fbe441
+  font-size: 25px
+  cursor: pointer
+
+.accordion_arrow
+  display: block
+  transition: all .3s linear
+
+.accordion_arrow[aria-expanded="false"]
+  transform: rotateZ(180deg)
+
+.accordion_content
+  overflow: hidden
+  max-height: 1000px
+  transition: max-height 1s ease-in-out
+
+.accordion_content[aria-expanded="false"]
+  max-height: 0px
+  transition: max-height 1s cubic-bezier(0, 1, 0, 1)
+
+.content_container
+  padding: 10px 0
+  display: flex
+  flex-direction: row
+  justify-content: flex-end
+
+.content_text
+  max-width: 900px
+  color: #A4A4A4
+  line-height: 1.3em
+
+@media ( max-width: 950px )
+  .content_container
+    gap: 75px
+
+@media ( max-width: 768px )
+  .content_container
+    flex-direction: column
+    gap: 30px
