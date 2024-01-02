@@ -17,7 +17,7 @@ const Intro = () => {
   const chooseBrand = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value
     setSelectedBrand(selectedValue)
-    setSelectedModel('') // Reset selected model when brand changes
+    setSelectedModel('')
     setSelectedYearFrom('')
     setSelectedYearTo('')
   }
@@ -43,7 +43,7 @@ const Intro = () => {
   }
 
   const redirectToCopart = () => {
-    // Construct the URL based on the selected data
+    // Створити URL-адресу на основі вибраних даних
     const baseUrl = 'https://www.copart.com/lotSearchResults'
     const queryParams = [
       'free=true',
@@ -52,12 +52,12 @@ const Intro = () => {
 
     const url = `${baseUrl}?${queryParams.join('&')}`
 
-    // Open a new window with the Copart website
+    // Відкрийти нове вікно з веб-сайтом Copart
     window.open(url, '_blank')
   }
 
   const redirectToIaai = () => {
-    // Construct the URL based on the selected data
+    // Створіти URL-адресу на основі вибраних даних
     const baseUrl = 'https://www.iaai.com/Search'
     const queryParams = [
       `Keyword=${encodeURIComponent(`${selectedBrand} ${selectedModel} ${selectedYearFrom}-${selectedYearTo}`)}`,
@@ -65,7 +65,7 @@ const Intro = () => {
 
     const url = `${baseUrl}?${queryParams.join('&')}`
 
-    // Open a new window with the IAAI website
+    // Відкрити нове вікно з веб-сайтом IAAI
     window.open(url, '_blank')
   }
 
@@ -77,6 +77,7 @@ const Intro = () => {
     }
   }
 
+  // Фільтрування моделі по маці машини
   const filteredBrand = OptionsList.find((brand) => brand.name === selectedBrand)
   const filteredModels = filteredBrand ? filteredBrand.models || [] : []
 

@@ -42,7 +42,7 @@ const Header = () => {
         <div className="container">
           <div className={styles.header__content}>
             <Link className={styles.header__logo} to="main" spy={true} smooth={true} offset={-180} duration={600}>
-              <Image src="/logo/logo.png" width={100} height={50} alt="cars from USA" />
+              <Image src="/logo/logo5.png" width={100} height={50} alt="cars from USA" />
             </Link>
             <nav className={styles.header__nav}>
               <ul className={styles.nav__items}>
