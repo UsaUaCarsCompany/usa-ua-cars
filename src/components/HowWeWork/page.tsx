@@ -17,8 +17,8 @@ const HowWeWork = () => {
               <div className={styles.card__content}>
                 <div className={styles.content__icon}>
                   <Image src={`/work/${work.image}.png`} width={65} height={65} alt={work.title} />
+                  <div className={styles.content__title}>{work.title}</div>
                 </div>
-                <div className={styles.content__title}>{work.title}</div>
                 <div className={styles.content__subtitle}>{work.subtitle}</div>
               </div>
             </div>
