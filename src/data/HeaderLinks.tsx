@@ -26,4 +26,10 @@ export const HeaderLinks: HeaderLinksProps[] = [
     href: 'Clearance',
     index: 1.2,
   },
+  {
+    id: 989,
+    name: 'FAQ',
+    href: 'faq',
+    index: 1.2,
+  },
 ]

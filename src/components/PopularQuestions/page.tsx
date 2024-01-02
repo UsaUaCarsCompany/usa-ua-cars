@@ -27,7 +27,7 @@ export const Questions = () => {
   }
 
   return (
-    <div className={styles.questions__block}>
+    <div className={styles.questions__block} id="faq">
       <div className="container">
         <div className={styles.container__inner}>
           <div className={styles.inner__title}>
@@ -41,17 +41,14 @@ export const Questions = () => {
                   key={id}
                   className={clsx(styles.accordion__block, openAccordions[id] ? styles.accordion__block__active : '')}
                 >
-                  <div
-                    className={styles.accordion_heading}
-                    aria-expanded={openAccordions[id]}
-                    onClick={() => toggleHandler(id)}
-                  >
+                  <div className={styles.accordion_heading} onClick={() => toggleHandler(id)}>
                     <h3>{accord.title}</h3>
 
                     <button className={styles.accordion_icon} onClick={() => toggleHandler(id)}>
                       <FontAwesomeIcon
                         icon={faChevronDown}
                         className={clsx(styles.accordion_arrow)}
+                        onClick={() => toggleHandler(id)}
                         aria-expanded={openAccordions[id]}
                       />
                     </button>
