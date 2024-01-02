@@ -1,11 +1,19 @@
 import clsx from 'clsx'
 import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import styles from './PopapStyle.module.sass'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faEnvelope, faPhone, faMessage } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
 import { SocialsData, SocialsDataProps } from '@/data/SocialsData'
 import { ToastContainer, toast } from 'react-toastify'
+
+type ContactFormValues = {
+  name: string
+  email: string
+  phone: string
+  message: string
+}
 
 type ContactPopupProps = {
   openContact: boolean
@@ -14,29 +22,21 @@ type ContactPopupProps = {
 
 const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
   const [sendLoading, setSendLoading] = useState(false)
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm<ContactFormValues>({
+    mode: 'onBlur',
   })
-
-  const handleInputChange = (e: any) => {
-    const { name, value } = e.target
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }))
-  }
 
   const handleCloseContactPopup = () => {
     setOpenContact(false)
     document.body.style.overflow = 'auto'
   }
 
-  //!! POST METHOD SENDING EMAIL
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const onSubmit = async (data: ContactFormValues) => {
     setSendLoading(true)
 
     try {
@@ -45,13 +45,12 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(data),
       })
 
       if (response.ok) {
         console.log('Email sent successfully!')
-        // Опціонально: додати код для відображення повідомлення про успішну відправку форми
-        setFormData({ name: '', email: '', phone: '', message: '' })
+        reset() // Очищення форми
         setSendLoading(false)
         handleCloseContactPopup()
         toast.success('Сообщение отправилось успешно!', {
@@ -111,21 +110,19 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
             </p>
           </div>
           <div className={styles.inputs_inner}>
-            <form onSubmit={handleSubmit} className={styles.inputs_form}>
+            <form onSubmit={handleSubmit(onSubmit)} className={styles.inputs_form}>
               <div className={styles.input_block}>
                 <label className={styles.input_label}>
                   <FontAwesomeIcon icon={faUser} />
                   Как к вам обращаться?
                 </label>
                 <input
-                  value={formData.name}
-                  onChange={handleInputChange}
+                  {...register('name', { required: 'Поле обязательно' })}
                   type="text"
                   placeholder="Sonic"
-                  name="name"
-                  required
-                  className={styles.input__field}
+                  className={clsx(styles.input__field, errors.name ? styles.input__field__fail : '')}
                 />
+                {errors.name && <span className={styles.error_message}>{errors.name.message}</span>}
               </div>
               <div className={styles.input_block}>
                 <label className={styles.input_label}>
@@ -133,14 +130,18 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
                   Емайл
                 </label>
                 <input
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  type="Email"
+                  {...register('email', {
+                    required: 'Введен неверный адрес эл. почты',
+                    pattern: {
+                      value: /^\S+@\S+\.\S+$/,
+                      message: 'Введите корректную эл. почту',
+                    },
+                  })}
+                  type="email"
                   placeholder="example@gmail.com"
-                  required
-                  className={styles.input__field}
+                  className={clsx(styles.input__field, errors.email ? styles.input__field__fail : '')}
                 />
+                {errors.email && <span className={styles.error_message}>{errors.email.message}</span>}
               </div>
               <div className={styles.input_block}>
                 <label className={styles.input_label}>
@@ -148,14 +149,18 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
                   Телефон
                 </label>
                 <input
-                  value={formData.phone}
-                  onChange={handleInputChange}
+                  {...register('phone', {
+                    required: 'Введите номер мобильного телефона',
+                    pattern: {
+                      value: /((\+38)?\(?\d{3}\)?[\s\.-]?(\d{7}|\d{3}[\s\.-]\d{2}[\s\.-]\d{2}|\d{3}-\d{4}))/g,
+                      message: 'Введите корректный номер мобильного телефона',
+                    },
+                  })}
                   type="tel"
-                  name="phone"
                   placeholder="+380630000000"
-                  required
-                  className={styles.input__field}
+                  className={clsx(styles.input__field, errors.phone ? styles.input__field__fail : '')}
                 />
+                {errors.phone && <span className={styles.error_message}>{errors.phone.message}</span>}
               </div>
               <div className={styles.input_block}>
                 <label className={styles.input_label}>
@@ -163,20 +168,18 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
                   Cообщения
                 </label>
                 <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
+                  {...register('message', { required: 'Поле обязательно' })}
                   placeholder="Ваше сообщение"
-                  required
-                  className={styles.input__field_area}
+                  className={clsx(styles.input__field_area, errors.message ? styles.input__field_area__fail : '')}
                 />
+                {errors.message && <span className={styles.error_message}>{errors.message.message}</span>}
               </div>
               {sendLoading ? (
                 <div className="loader__inner">
                   <div className="loader"></div>
                 </div>
               ) : (
-                <button type="submit" className={styles.btn_contact}>
+                <button type="submit" disabled={!isValid} className={styles.btn_contact}>
                   <span>Отправить</span>
                 </button>
               )}
