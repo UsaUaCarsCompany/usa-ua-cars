@@ -38,7 +38,7 @@ export const BurgerMenu = ({ activeBurger, setActiveBurger }: BurgerMenuProps) =
             offset={-180}
             duration={600}
           >
-            <Image src="/logo/logo4.png" width={100} height={50} alt="cars from USA" />
+            <Image src="/logo/logo5.png" width={100} height={50} alt="cars from USA" />
           </Link>
           <button className={styles.burger_close} onClick={handleCloseBurgerMenu}>
             ✖
