@@ -12,11 +12,12 @@
   flex-direction: column
   font-size: 30px
   font-weight: 700
+  margin-bottom: 20px
 
 .popCars__list
   display: flex
-  justify-content: space-between
   flex-direction: row
+  flex-wrap: wrap
   gap: 20px
 
 .list__cars__cards
@@ -25,7 +26,7 @@
   background-color: #fff
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15)
   border-radius: 4px
-  max-width: 50%
+  max-width: 49%
   width: 100%
   transition: all 0.5s ease
   &:hover .extra__info
@@ -55,6 +56,7 @@
     transform: translateY(0px)
 
 .extra__info
+  width: 100%
   transition: all 0.5s ease
   position: absolute
   color: #000
@@ -62,6 +64,40 @@
   height: 100%
   padding: 20px
   bottom: -270px
+
+.info__content
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  height: 100%
+
+.content__inner
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  gap: 20px
+  padding-bottom: 12px
+  border-bottom: 2px dashed #c4c4c4
+
+.inner__content
+  display: flex
+  flex-direction: column
+  gap: 8px
+  font-size: 13px
+  color: #303030
+  width: 50%
+  line-height: 16px
+  & div
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+    gap: 5px
+
+.inner__content__bottom
+  width: 100%
+  border-bottom: 2px dashed #c4c4c4
+  padding-bottom: 12px
 
 .cars__content
   padding: 20px
@@ -133,6 +169,10 @@
 
   100%
     transform: scale(1)
+
+@media (max-width: 1028px)
+  .list__cars__cards
+    max-width: 100%
 
 @media (max-width: 768px)
   .popCars__list

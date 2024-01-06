@@ -1,26 +1,26 @@
 import clsx from 'clsx'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import styles from './PopapStyle.module.sass'
+import styles from './IwantPopupStyles.module.sass'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faEnvelope, faPhone, faMessage } from '@fortawesome/free-solid-svg-icons'
-import Image from 'next/image'
-import { SocialsData, SocialsDataProps } from '@/data/SocialsData'
 import { ToastContainer, toast } from 'react-toastify'
+import { PopularCarsDataProps } from '@/data/PopularCarsData'
 
 type ContactFormValues = {
   name: string
   email: string
   phone: string
-  message: string
+  car: string
 }
 
-type ContactPopupProps = {
-  openContact: boolean
-  setOpenContact: (isOpenContact: boolean) => void
+type IwantPopupProps = {
+  openWantPopup: boolean
+  setOpenWantPopup: (isOpenContact: boolean) => void
+  selectedCar: PopularCarsDataProps | null
 }
 
-const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
+const IwantPopup = ({ openWantPopup, setOpenWantPopup, selectedCar }: IwantPopupProps) => {
   const [sendLoading, setSendLoading] = useState(false)
   const {
     register,
@@ -32,7 +32,7 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
   })
 
   const handleCloseContactPopup = () => {
-    setOpenContact(false)
+    setOpenWantPopup(false)
     reset() // Очищення форми
     document.body.style.overflow = 'auto'
   }
@@ -41,7 +41,7 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
     setSendLoading(true)
 
     try {
-      const response = await fetch('/api/send', {
+      const response = await fetch('/api/sendWant', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -90,13 +90,13 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
       />
       {/* Задній план ============= */}
       <div
-        className={clsx(styles.modal_holder, openContact ? styles.show_holder : '')}
+        className={clsx(styles.modal_holder, openWantPopup ? styles.show_holder : '')}
         onClick={handleCloseContactPopup}
       ></div>
       {/* Задній план ============= */}
 
       {/* Контентна частина ============= */}
-      <div className={clsx(styles.modal_window, openContact ? styles.show_window : '')}>
+      <div className={clsx(styles.modal_window, openWantPopup ? styles.show_window : '')}>
         <div className={styles.modal_header}>
           <button className={styles.modal_close} onClick={handleCloseContactPopup}>
             Закрыть
@@ -104,14 +104,19 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
         </div>
         <div className={styles.modal_content}>
           <div className={styles.content_title}>
-            <h2>Oставьте свою контактную форму!</h2>
-            <p>
-              Мы перезвоним или напишем вам в удобное для вас время, ответим на все интересующие вопросы, поможем найти
-              хорошее авто и сделаем расчет стоимости.
-            </p>
+            <h2>Свяжитесь с нами</h2>
           </div>
           <div className={styles.inputs_inner}>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.inputs_form}>
+              <div className={styles.input_block}>
+                <input
+                  {...register('car')}
+                  type="text"
+                  value={selectedCar?.name || ''}
+                  readOnly
+                  className={clsx(styles.input__field)}
+                />
+              </div>
               <div className={styles.input_block}>
                 <label className={styles.input_label}>
                   <FontAwesomeIcon icon={faUser} />
@@ -163,18 +168,7 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
                 />
                 {errors.phone && <span className={styles.error_message}>{errors.phone.message}</span>}
               </div>
-              <div className={styles.input_block}>
-                <label className={styles.input_label}>
-                  <FontAwesomeIcon icon={faMessage} />
-                  Cообщения
-                </label>
-                <textarea
-                  {...register('message', { required: 'Поле обязательно' })}
-                  placeholder="Ваше сообщение"
-                  className={clsx(styles.input__field_area, errors.message ? styles.input__field_area__fail : '')}
-                />
-                {errors.message && <span className={styles.error_message}>{errors.message.message}</span>}
-              </div>
+
               {sendLoading ? (
                 <div className="loader__inner">
                   <div className="loader"></div>
@@ -185,23 +179,6 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
                 </button>
               )}
             </form>
-            <div className={styles.devider_block}>
-              <span>или</span>
-              <hr className={styles.devider}></hr>
-            </div>
-            <div className={styles.contact_socials}>
-              <h4>Свяжитесь с нами через любую соц сеть</h4>
-              <ul className={styles.socails_list}>
-                {SocialsData.map(({ ...soc }: SocialsDataProps) => (
-                  <li key={soc.id} className={styles.list_link}>
-                    <h5>{soc.title}</h5>
-                    <a target="_blank" href={soc.link} className={styles.link_item}>
-                      <Image src={`/soc/${soc.image}.svg`} width={22} height={22} alt={soc.title} />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
         </div>
       </div>
@@ -210,4 +187,4 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
   )
 }
 
-export default ContactPopup
+export default IwantPopup
