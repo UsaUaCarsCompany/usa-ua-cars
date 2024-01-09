@@ -6,13 +6,14 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import Head from 'next/head'
 import Header from '@/components/Header/page'
+import Footer from '@/components/Footer/page'
 
 export const metadata = {
-  title: 'Car from USA',
-  description: 'Discover & Share AI Prompts',
+  title: 'USA-UA CARS',
+  description: 'Купівля на аукціонах автомобілів з США та перевезення в Україну',
   icons: {
     icon: {
-      url: '/assets/icons/logo.ico',
+      url: '/logo/favicon-32x32.png',
       type: 'image/ico',
     },
   },
@@ -25,11 +26,19 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#202124" />
+        <meta name="msapplication-TileColor" content="#202124" />
+        <meta name="theme-color" content="#ffffff"></meta>
       </Head>
       <body>
         <div className="wrapper">
           <Header />
           {children}
+          <Footer />
         </div>
       </body>
     </html>
