@@ -1,3 +1,29 @@
+.footer__block
+  border-top: 3px solid #fbe441
+  padding: 60px 0
+  background-color: #17181a
+  box-shadow: 0px 0px 14px 0px rgba(250, 219, 95, 0.75)
+
+.footer__inner
+  display: flex
+  flex-direction: column
+  gap: 30px
+
+.inner__logo__links
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  align-items: center
+  gap: 20px
+
+.header__logo
+  width: 160px
+  min-width: 110px
+  height: auto
+  & img
+    width: 100%
+    height: 100%
+
 .header__nav
   display: flex
   flex-direction: column
@@ -7,13 +33,17 @@
   display: flex
   flex-direction: row
   align-items: center
+  flex-wrap: wrap
   gap: 15px
+  justify-content: center
 
 .item__nav a
   font-weight: 700
   transition: all 0.1s ease
   padding: 8px 10px
   position: relative
+  font-size: 16px
+  color: #cacaca
   &::after
     position: absolute
     content: ""
@@ -21,23 +51,52 @@
     height: 2px
     bottom: 0%
     left: -70%
-    background-color: #fbe441
+    background-color: #cacaca
     transition: all 0.3s ease
     opacity: 0
   &:hover::after
     left: 0%
     opacity: 1
   &:hover
-    color: #fbe441
+    color: #cacaca
 
 .active a
-  color: #fbe441
+  color: #cacaca
   &::after
     left: 0%
     opacity: 1
 
 .item__nav .active
-  color: #fbe441
+  color: #cacaca
   &::after
     left: 0%
     opacity: 1
+
+.socails_list
+  margin-top: 20px
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: center
+  gap: 20px
+
+.list_link
+  display: flex
+  flex-direction: column
+  width: 100%
+  align-items: center
+  gap: 15px
+
+.link_item
+  transition: all 0.3s ease
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  width: 45px
+  height: 45px
+  border-radius: 50%
+  box-shadow: 0px 0px 5px 0px rgba(255, 255, 255, 1)
+  &:hover
+    box-shadow: 0px 0px 14px 0px rgb(255, 255, 255)
+    transform: scale(1.1)

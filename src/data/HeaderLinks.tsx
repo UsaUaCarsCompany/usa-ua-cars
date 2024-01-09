@@ -19,6 +19,12 @@ export const HeaderLinks: HeaderLinksProps[] = [
     href: 'howWeWork',
     index: 1,
   },
+  {
+    id: 76481,
+    name: 'Популярное',
+    href: 'Popular',
+    index: 1.2,
+  },
 
   {
     id: 7658,

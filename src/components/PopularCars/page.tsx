@@ -28,7 +28,7 @@ const PopularCarsSlider = () => {
   return (
     <>
       <IwantPopup openWantPopup={openWantPopup} setOpenWantPopup={setOpenWantPopup} selectedCar={selectedCar} />
-      <div className={styles.popCars__block}>
+      <div className={styles.popCars__block} id="Popular">
         <div className="container">
           <div className={styles.inner__title}>
             <h3>Самые популярные машины на сегодняшний день</h3>
