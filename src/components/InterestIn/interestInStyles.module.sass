@@ -105,6 +105,7 @@
   box-shadow: 0px 0px 14px 0px rgba(250, 219, 95, 0.75)
   overflow: hidden
   border: none
+  height: 55px
   &:hover
     box-shadow: 0px 0px 4px 0px rgba(250, 219, 95, 0.75)
 
@@ -146,3 +147,13 @@
 
   100%
     transform: scale(1)
+
+@media (max-width: 1000px)
+  .inner__card
+    padding: 30px 15px
+
+  .card__form__interest
+    gap: 20px
+    & h2
+      font-size: 26px
+      text-align: center
