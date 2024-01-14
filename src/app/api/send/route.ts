@@ -52,12 +52,16 @@ export async function POST(req: NextRequest) {
     const mailOptions = {
       from: 'linetsky.yura@gmail.com',
       to: 'linetsky.yura@gmail.com',
-      subject: `Клієнт на імя ${name} хоче звязатися з вами`,
-      html: `<h1>Contact Form Data:</h1>
-      <p>Name: ${name}</p>
-      <p>Email: ${email}</p>
-      <p>Phone: ${phone}</p>
-      <p>Message: ${message}</p>`,
+      subject: `Клієнт на ім'я ${name} хоче зв'язатися з вами`,
+      html: `
+      <div style="background-color: #fbe441; color: #000; padding: 20px; border-radius: 12px;">
+        <h1>Відправлена форма клієнта:</h1>
+        <h2>Ім'я: ${name}</h2>
+        <h2>Емайл: ${email}</h2>
+        <h2>Номер телефону: ${phone}</h2>
+        <h3>Повідомлення: ${message}</h3>
+      </div>
+    `,
     };
 
     // Send the email

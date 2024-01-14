@@ -1,0 +1,148 @@
+.interest__block
+  padding: 60px 0
+  background: url("/bg/bg.webp") center no-repeat
+  background-size: cover
+  position: relative
+
+.block__overlay
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background-color: rgb(32, 33, 36)
+  opacity: 80%
+
+.container__inner
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: center
+
+.inner__card
+  max-width: 646px
+  width: 100%
+  padding: 50px
+  background-color: rgb(55 55 55 / 90%)
+  box-shadow: 6px 14px 35px rgba(0, 0, 0, 0.35)
+  position: relative
+  z-index: 2
+
+.card__form__interest
+  display: flex
+  flex-direction: column
+  gap: 30px
+  & h2
+    font-size: 36px
+    text-align: center
+
+.input__options
+  display: flex
+  flex-direction: column
+  gap: 3px
+  position: relative
+  width: 100%
+  transition: all 0.3s ease
+
+.select__options
+  transition: all 0.3s ease
+  color: #8c8c8c
+  padding: 0 15px
+  width: 100%
+  height: 100%
+  border-radius: 6px
+  font-size: 24px
+  font-weight: 400
+  border: solid 2px #efe9e9
+  min-height: 55px
+  &:hover
+    border: solid 2px #202124
+    color: #202124
+  &:focus
+    color: #202124
+    outline: none
+
+.input_block
+  display: flex
+  flex-direction: column
+  gap: 3px
+
+.input__field
+  transition: all 0.3s ease
+  color: #8c8c8c
+  padding: 0 15px
+  width: 100%
+  height: 100%
+  border-radius: 6px
+  font-size: 24px
+  font-weight: 400
+  min-height: 55px
+  border: solid 2px #efe9e9
+  &:hover
+    border: solid 2px #202124
+    color: #202124
+  &:focus
+    border: solid 2px #202124
+    outline: none
+    color: #202124
+
+.input__field__fail
+  border: 2px solid #ff5757
+
+.error_message
+  font-size: 12px
+  color: #ff5757
+
+.btn_contact
+  position: relative
+  display: flex
+  justify-content: center
+  align-items: center
+  border-radius: 6px
+  background: #fbe441
+  -webkit-box-shadow: 0px 0px 14px 0px rgba(250, 219, 95, 0.75)
+  -moz-box-shadow: 0px 0px 14px 0px rgba(250, 219, 95, 0.75)
+  box-shadow: 0px 0px 14px 0px rgba(250, 219, 95, 0.75)
+  overflow: hidden
+  border: none
+  &:hover
+    box-shadow: 0px 0px 4px 0px rgba(250, 219, 95, 0.75)
+
+  &:after
+    content: " "
+    width: 0%
+    height: 100%
+    background: #202124
+    position: absolute
+    transition: all 0.4s ease-in-out
+    right: 0
+
+  &:hover::after
+    right: auto
+    left: 0
+    width: 100%
+
+  span
+    text-align: center
+    text-decoration: none
+    width: 100%
+    padding: 14px 16px
+    color: #202124
+    font-size: 16px
+    font-weight: 700
+    z-index: 5
+    transition: all 0.3s ease-in-out
+
+  &:hover span
+    color: #fff
+    animation: scaleUp 0.3s ease-in-out
+
+@keyframes scaleUp
+  0%
+    transform: scale(1)
+
+  50%
+    transform: scale(0.95)
+
+  100%
+    transform: scale(1)

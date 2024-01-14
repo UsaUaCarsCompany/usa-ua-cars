@@ -16,7 +16,7 @@ export const PopularCarsSlideItem = ({ car, openWantPopup, setOpenWantPopup, onC
     <>
       <li className={styles.list__cars__cards}>
         <div className={styles.cars__header__block}>
-          <Image src={`/cars/${car.image}.png`} width={500} height={270} alt="car" />
+          <Image src={`/cars/${car.image}.png`} width={500} height={270} alt={car.name} />
           <div className={styles.extra__info}>
             <div className={styles.info__content}>
               <div className={styles.content__inner}>

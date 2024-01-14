@@ -37,7 +37,7 @@ import nodemailer from 'nodemailer';
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, email, phone, car } = body;
+    const { email, phone, turnkeyBudget,typeOfGoat } = body;
 
     // Set up the nodemailer transporter
     const transporter = nodemailer.createTransport({
@@ -52,16 +52,16 @@ export async function POST(req: NextRequest) {
     const mailOptions = {
       from: 'linetsky.yura@gmail.com',
       to: 'linetsky.yura@gmail.com',
-      subject: `Клієнт на імя ${name} хоче конкретний автомобіль`,
+      subject: `Клієнт ${email} має вибір автомобіль`,
       html: `
-      <div style="background-color: #fbe441; color: #000; padding: 20px; border-radius: 12px;">
-        <h1>Відправлена форма клієнта:</h1>
-        <h2>Ім'я: ${name}</h2>
-        <h2>Емайл: ${email}</h2>
-        <h2>Номер телефону: ${phone}</h2>
-        <h2>Автомобіль який хоче клієнт: ${car}</h2>
-      </div>
-    `,
+    <div style="background-color: #fbe441; color: #000; padding: 20px; border-radius: 12px;">
+      <h1>Відправлена форма клієнта:</h1>
+      <h2>Емайл: ${email}</h2>
+      <h2>Номер телефону: ${phone}</h2>
+      <h2>Бюджет клієнта: ${turnkeyBudget}</h2>
+      <h2>Тип кузова: ${typeOfGoat}</h2>
+    </div>
+  `,
     };
 
     // Send the email

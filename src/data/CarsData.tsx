@@ -57,7 +57,7 @@ export const CarsData: CarsDataProps[] = [
 
   {
     id: 6525,
-    title: 'EEP CHEROKEE',
+    title: 'JEEP CHEROKEE',
     price: 'от 13 000 до 15 000 $',
     image: 'car8',
   },
