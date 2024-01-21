@@ -18,9 +18,10 @@ type ContactFormValues = {
 type ContactPopupProps = {
   openContact: boolean
   setOpenContact: (isOpenContact: boolean) => void
+  language: string
 }
 
-const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
+const ContactPopup = ({ openContact, setOpenContact, language }: ContactPopupProps) => {
   const [sendLoading, setSendLoading] = useState(false)
   const {
     register,
@@ -54,7 +55,7 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
         reset() // Очищення форми
         setSendLoading(false)
         handleCloseContactPopup()
-        toast.success('Сообщение отправилось успешно!', {
+        toast.success(language === 'ua' ? 'Повідомлення відправлено успішно!' : 'Сообщение отправилось успешно!', {
           position: 'top-right',
           autoClose: 3000,
           hideProgressBar: false,
@@ -66,11 +67,9 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
         })
       } else {
         console.error('Error sending email:', response.statusText)
-        // Опціонально: додати код для відображення повідомлення про помилку відправки форми
       }
     } catch (error) {
       console.error('Error sending email:', error)
-      // Опціонально: додати код для відображення повідомлення про помилку відправки форми
     }
   }
 
@@ -99,15 +98,16 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
       <div className={clsx(styles.modal_window, openContact ? styles.show_window : '')}>
         <div className={styles.modal_header}>
           <button className={styles.modal_close} onClick={handleCloseContactPopup}>
-            Закрыть
+            {language === 'ua' ? 'Закрити' : 'Закрыть'}
           </button>
         </div>
         <div className={styles.modal_content}>
           <div className={styles.content_title}>
-            <h2>Oставьте свою контактную форму!</h2>
+            <h2>{language === 'ua' ? 'Залиште свою контактну форму!' : 'Оставьте свою контактную форму!'}</h2>
             <p>
-              Мы перезвоним или напишем вам в удобное для вас время, ответим на все интересующие вопросы, поможем найти
-              хорошее авто и сделаем расчет стоимости.
+              {language === 'ua'
+                ? 'Ми передзвонимо або напишемо вам у зручний для вас час, відповімо на всі цікавлячі питання, допоможемо знайти хороше авто і зробимо розрахунок вартості.'
+                : 'Мы перезвоним или напишем вам в удобное для вас время, ответим на все интересующие вопросы, поможем найти хорошее авто и сделаем расчет стоимости.'}
             </p>
           </div>
           <div className={styles.inputs_inner}>
@@ -115,12 +115,12 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
               <div className={styles.input_block}>
                 <label className={styles.input_label}>
                   <FontAwesomeIcon icon={faUser} />
-                  Как к вам обращаться?
+                  {language === 'ua' ? 'Як до вас звертатися?' : 'Как к вам обращаться?'}
                 </label>
                 <input
-                  {...register('name', { required: 'Поле обязательно' })}
+                  {...register('name', { required: language === 'ua' ? "Поле обов'язкове" : 'Поле обязательно' })}
                   type="text"
-                  placeholder="Sonic"
+                  placeholder={language === 'ua' ? 'Сонік' : 'Sonic'}
                   className={clsx(styles.input__field, errors.name ? styles.input__field__fail : '')}
                 />
                 {errors.name && <span className={styles.error_message}>{errors.name.message}</span>}
@@ -128,14 +128,15 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
               <div className={styles.input_block}>
                 <label className={styles.input_label}>
                   <FontAwesomeIcon icon={faEnvelope} />
-                  Емайл
+                  {language === 'ua' ? 'Емайл' : 'Эл. почта'}
                 </label>
                 <input
                   {...register('email', {
-                    required: 'Введен неверный адрес эл. почты',
+                    required:
+                      language === 'ua' ? 'Введено невірний адрес ел. пошти' : 'Введен неверный адрес эл. почты',
                     pattern: {
                       value: /^\S+@\S+\.\S+$/,
-                      message: 'Введите корректную эл. почту',
+                      message: language === 'ua' ? 'Введіть коректну ел. пошту' : 'Введите корректную эл. почту',
                     },
                   })}
                   type="email"
@@ -151,10 +152,14 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
                 </label>
                 <input
                   {...register('phone', {
-                    required: 'Введите номер мобильного телефона',
+                    required:
+                      language === 'ua' ? 'Введіть номер мобільного телефону' : 'Введите номер мобильного телефона',
                     pattern: {
                       value: /((\+38)?\(?\d{3}\)?[\s\.-]?(\d{7}|\d{3}[\s\.-]\d{2}[\s\.-]\d{2}|\d{3}-\d{4}))/g,
-                      message: 'Введите корректный номер мобильного телефона',
+                      message:
+                        language === 'ua'
+                          ? 'Введіть коректний номер мобільного телефону'
+                          : 'Введите корректный номер мобильного телефона',
                     },
                   })}
                   type="tel"
@@ -166,11 +171,11 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
               <div className={styles.input_block}>
                 <label className={styles.input_label}>
                   <FontAwesomeIcon icon={faMessage} />
-                  Cообщения
+                  {language === 'ua' ? 'Повідомлення' : 'Cообщения'}
                 </label>
                 <textarea
-                  {...register('message', { required: 'Поле обязательно' })}
-                  placeholder="Ваше сообщение"
+                  {...register('message', { required: language === 'ua' ? "Поле обов'язкове" : 'Поле обязательно' })}
+                  placeholder={language === 'ua' ? 'Ваше повідомлення' : 'Ваше сообщение'}
                   className={clsx(styles.input__field_area, errors.message ? styles.input__field_area__fail : '')}
                 />
                 {errors.message && <span className={styles.error_message}>{errors.message.message}</span>}
@@ -181,16 +186,20 @@ const ContactPopup = ({ openContact, setOpenContact }: ContactPopupProps) => {
                 </div>
               ) : (
                 <button type="submit" disabled={!isValid} className={styles.btn_contact}>
-                  <span>Отправить</span>
+                  <span>{language === 'ua' ? 'Відправити' : 'Отправить'}</span>
                 </button>
               )}
             </form>
             <div className={styles.devider_block}>
-              <span>или</span>
+              <span>{language === 'ua' ? 'або' : 'или'}</span>
               <hr className={styles.devider}></hr>
             </div>
             <div className={styles.contact_socials}>
-              <h4>Свяжитесь с нами через любую соц сеть</h4>
+              <h4>
+                {language === 'ua'
+                  ? "Зв'яжіться з нами через будь-яку соцмережу"
+                  : 'Свяжитесь с нами через любую соц сеть'}
+              </h4>
               <ul className={styles.socails_list}>
                 {SocialsData.map(({ ...soc }: SocialsDataProps) => (
                   <li key={soc.id} className={styles.list_link}>

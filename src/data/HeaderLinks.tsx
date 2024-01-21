@@ -1,6 +1,7 @@
 export type HeaderLinksProps = {
   id: number
-  name: string
+  nameUa: string
+  nameRu: string
   href: string
   index: number
 }
@@ -8,33 +9,38 @@ export type HeaderLinksProps = {
 export const HeaderLinks: HeaderLinksProps[] = [
   {
     id: 2324,
-    name: 'Главная',
+    nameUa: 'Головна',
+    nameRu: 'Главная',
     href: 'main',
     index: 0.8,
   },
 
   {
     id: 2523,
-    name: 'Как мы работаем',
+    nameUa: 'Як ми працюємо',
+    nameRu: 'Как мы работаем',
     href: 'howWeWork',
     index: 1,
   },
   {
     id: 76481,
-    name: 'Популярное',
+    nameUa: 'Популярне',
+    nameRu: 'Популярное',
     href: 'Popular',
     index: 1.2,
   },
 
   {
     id: 7658,
-    name: 'Растаможка',
+    nameUa: 'Розмитнення',
+    nameRu: 'Растаможка',
     href: 'Clearance',
     index: 1.2,
   },
   {
     id: 989,
-    name: 'FAQ',
+    nameUa: 'FAQ',
+    nameRu: 'FAQ',
     href: 'faq',
     index: 1.2,
   },

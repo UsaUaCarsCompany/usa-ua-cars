@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { AccordionsData, AccordionsDataProps } from '@/data/AccordionsData'
+import { useLanguage } from '@/ContextLanguage/LanguageContext'
 
 interface AccordionState {
   [id: number]: boolean
@@ -18,6 +19,7 @@ export const Questions = () => {
     })
     return accordionState
   })
+  const { language, switchLanguage } = useLanguage()
 
   const toggleHandler = (accordionId: number) => {
     setOpenAccordions((prevOpenAccordions) => ({
@@ -31,7 +33,7 @@ export const Questions = () => {
       <div className="container">
         <div className={styles.container__inner}>
           <div className={styles.inner__title}>
-            <h3>Часто задаваемые вопросы</h3>
+            <h3>{language === 'ua' ? 'Часті запитання' : 'Часто задаваемые вопросы'}</h3>
             <span />
           </div>
           <div className={styles.inner__questions}>
@@ -42,7 +44,7 @@ export const Questions = () => {
                   className={clsx(styles.accordion__block, openAccordions[id] ? styles.accordion__block__active : '')}
                 >
                   <div className={styles.accordion_heading} onClick={() => toggleHandler(id)}>
-                    <h3>{accord.title}</h3>
+                    <h3>{language === 'ua' ? accord.title.ua : accord.title.ru}</h3>
 
                     <button className={styles.accordion_icon} onClick={() => toggleHandler(id)}>
                       <FontAwesomeIcon
@@ -55,7 +57,7 @@ export const Questions = () => {
                   </div>
                   <div aria-expanded={openAccordions[id]} className={styles.accordion_content}>
                     <div className={styles.content_container}>
-                      <div className={styles.content_text}>{accord.text}</div>
+                      <div className={styles.content_text}>{language === 'ua' ? accord.text.ua : accord.text.ru}</div>
                     </div>
                   </div>
                 </li>

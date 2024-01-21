@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { OptionsList, OptionsListData } from '../../selectData/Brands'
 import { YearFrom, YearFromProps } from '@/selectData/YearFrom'
 import { YearTo, YearToProps } from '@/selectData/YearTo'
+import { useLanguage } from '@/ContextLanguage/LanguageContext'
 
 const Intro = () => {
   const [selectedWebsite, setSelectedWebsite] = useState('copart')
@@ -13,6 +14,7 @@ const Intro = () => {
   const [selectedModel, setSelectedModel] = useState('')
   const [selectedYearFrom, setSelectedYearFrom] = useState('2000')
   const [selectedYearTo, setSelectedYearTo] = useState('2018')
+  const { language, switchLanguage } = useLanguage()
 
   const chooseBrand = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value
@@ -104,8 +106,12 @@ const Intro = () => {
                       name="car-auction"
                       id="car-auction"
                     >
-                      <option value="copart">Аукцион - www.copart.com</option>
-                      <option value="iaai">Аукцион - www.iaai.com</option>
+                      <option value="copart">
+                        {language === 'ua' ? 'Аукціон - www.copart.com' : 'Аукцион - www.copart.com'}
+                      </option>
+                      <option value="iaai">
+                        {language === 'ua' ? 'Аукціон - www.iaai.com' : 'Аукцион - www.iaai.com'}
+                      </option>
                     </select>
                   </div>
                   <div className={styles.input__options}>
@@ -147,7 +153,7 @@ const Intro = () => {
                         id="id_year_from"
                       >
                         <option value="2000" selected={!selectedYearFrom}>
-                          Год выпуска от
+                          {language === 'ua' ? 'Рік випуску від' : 'Год выпуска от'}
                         </option>
                         {YearFrom.map(({ ...year }: YearFromProps) => (
                           <option key={year.id} value={year.value}>
@@ -164,7 +170,7 @@ const Intro = () => {
                         id="id_year_to"
                       >
                         <option value="2018" selected={!selectedYearFrom}>
-                          Год выпуска до
+                          {language === 'ua' ? 'Рік випуску до' : 'Год выпуска до'}
                         </option>
                         {YearTo.map(({ ...year }: YearToProps) => (
                           <option key={year.id} value={year.value}>
@@ -175,7 +181,7 @@ const Intro = () => {
                     </div>
                   </div>
                   <button type="submit" className={styles.btn_search}>
-                    <span>ПОИСК АВТО</span>
+                    <span>{language === 'ua' ? 'ПОШУК АВТО' : 'ПОИСК АВТО'}</span>
                   </button>
                 </form>
               </div>

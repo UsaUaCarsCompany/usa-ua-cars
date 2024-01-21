@@ -6,8 +6,11 @@ import { Link } from 'react-scroll'
 import Image from 'next/image'
 import clsx from 'clsx'
 import { SocialsData, SocialsDataProps } from '@/data/SocialsData'
+import { useLanguage } from '@/ContextLanguage/LanguageContext'
 
 export const Footer = () => {
+  const { language, switchLanguage } = useLanguage()
+
   return (
     <footer className={styles.footer__block}>
       <div className="container">
@@ -18,10 +21,10 @@ export const Footer = () => {
             </Link>
             <nav className={styles.header__nav}>
               <ul className={styles.nav__items}>
-                {HeaderLinks.map(({ id, name, href }: HeaderLinksProps) => (
+                {HeaderLinks.map(({ id, nameUa, nameRu, href }: HeaderLinksProps) => (
                   <li key={id} className={clsx(styles.item__nav)}>
                     <Link to={href} spy={true} smooth={true} offset={-180} duration={600}>
-                      {name}
+                      {language === 'ua' ? nameUa : nameRu}
                     </Link>
                   </li>
                 ))}

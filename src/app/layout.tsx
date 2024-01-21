@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import Head from 'next/head'
 import Header from '@/components/Header/page'
 import Footer from '@/components/Footer/page'
+import { LanguageProvider } from '@/ContextLanguage/LanguageContext'
 
 export const metadata = {
   title: 'USA-UA CARS',
@@ -36,9 +37,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       </Head>
       <body>
         <div className="wrapper">
-          <Header />
-          {children}
-          <Footer />
+          <LanguageProvider>
+            <Header />
+            {children}
+            <Footer />
+          </LanguageProvider>
         </div>
       </body>
     </html>

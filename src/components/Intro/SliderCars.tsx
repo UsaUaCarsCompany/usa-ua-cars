@@ -9,8 +9,11 @@ import 'swiper/css/autoplay'
 import { Autoplay, Navigation } from 'swiper/modules'
 import Image from 'next/image'
 import { CarsDataProps, CarsData } from '@/data/CarsData'
+import { useLanguage } from '@/ContextLanguage/LanguageContext'
 
 export const CarsSlider = () => {
+  const { language, switchLanguage } = useLanguage()
+
   return (
     <>
       <Swiper
@@ -30,7 +33,7 @@ export const CarsSlider = () => {
                 <div className={styles.slider_car_content}>
                   <h1 className={styles.slider_car_title}>{car.title}</h1>
                   <p className={styles.slider_car_subtitle}>
-                    Цена в Америке <span>{car.price}</span>
+                    {language === 'ua' ? 'Ціна в Америці' : 'Цена в Америке'} <span>{car.price}</span>
                   </p>
                 </div>
 

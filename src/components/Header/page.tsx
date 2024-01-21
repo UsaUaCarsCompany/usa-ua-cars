@@ -7,11 +7,13 @@ import Image from 'next/image'
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu'
 import { HeaderLinks, HeaderLinksProps } from '@/data/HeaderLinks'
 import ContactPopup from '../ContactPopup/ContactPopup'
+import { useLanguage } from '@/ContextLanguage/LanguageContext'
 
 const Header = () => {
   const [scroll, setScroll] = useState(0)
   const [activeBurger, setActiveBurger] = useState(false)
   const [openContact, setOpenContact] = useState(false)
+  const { language, switchLanguage } = useLanguage()
 
   const handleScroll = () => {
     setScroll(window.scrollY)
@@ -36,8 +38,13 @@ const Header = () => {
 
   return (
     <>
-      <ContactPopup openContact={openContact} setOpenContact={setOpenContact} />
-      <BurgerMenu activeBurger={activeBurger} setActiveBurger={setActiveBurger} />
+      <ContactPopup openContact={openContact} setOpenContact={setOpenContact} language={language} />
+      <BurgerMenu
+        activeBurger={activeBurger}
+        setActiveBurger={setActiveBurger}
+        language={language}
+        switchLanguage={switchLanguage}
+      />
       <header className={clsx(styles.header, scroll < 50 ? '' : styles.headerBg)}>
         <div className="container">
           <div className={styles.header__content}>
@@ -46,16 +53,26 @@ const Header = () => {
             </Link>
             <nav className={styles.header__nav}>
               <ul className={styles.nav__items}>
-                {HeaderLinks.map(({ id, name, href }: HeaderLinksProps) => (
+                {HeaderLinks.map(({ id, nameUa, nameRu, href }: HeaderLinksProps) => (
                   <li key={id} className={clsx(styles.item__nav)}>
                     <Link activeClass={styles.active} to={href} spy={true} smooth={true} offset={-180} duration={600}>
-                      {name}
+                      {language === 'ua' ? nameUa : nameRu}
                     </Link>
                   </li>
                 ))}
                 <button className={styles.btn_contact} onClick={openContactPopup}>
-                  <span>Свяжитесь с нами</span>
+                  <span>{language === 'ua' ? "Зв'яжіться з нами" : 'Свяжитесь с нами'}</span>
                 </button>
+
+                <div className={styles.header_toggle}>
+                  <div onClick={switchLanguage} className={clsx(styles.toggle)}>
+                    <span className={clsx(language === 'ua' ? styles.text__active : '')}>UA</span>
+                    <span className={clsx(language === 'ru' ? styles.text__active : '')}>RU</span>
+                    <div
+                      className={clsx(styles.toggle_button, language === 'ua' ? styles.toggle_button_active : '')}
+                    ></div>
+                  </div>
+                </div>
                 <button
                   className={clsx(styles.nav_menu_burger, activeBurger ? styles.nav_menu_burger_active : '')}
                   type="button"

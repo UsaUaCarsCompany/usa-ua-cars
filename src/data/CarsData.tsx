@@ -74,4 +74,28 @@ export const CarsData: CarsDataProps[] = [
     price: 'от 15 000 до 19 000 $',
     image: 'car10',
   },
+  {
+    id: 5566,
+    title: 'TESLA MODEL X',
+    price: 'от 45 000 до 60 000 $',
+    image: 'car13',
+  },
+  {
+    id: 7788,
+    title: 'VOLKSWAGEN TIGUAN',
+    price: 'от 22 000 до 28 000 $',
+    image: 'car14',
+  },
+  {
+    id: 9900,
+    title: 'KIA NIRO',
+    price: 'от 15 000 до 22 000 $',
+    image: 'car15',
+  },
+  {
+    id: 1111,
+    title: 'HONDA CLARITY',
+    price: 'от 20 000 до 27 000 $',
+    image: 'car16',
+  },
 ]

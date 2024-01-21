@@ -9,9 +9,11 @@ import { HeaderLinks, HeaderLinksProps } from '@/data/HeaderLinks'
 type BurgerMenuProps = {
   activeBurger: boolean
   setActiveBurger: (isSetActiveBurger: boolean) => void
+  language: string
+  switchLanguage: () => void
 }
 
-export const BurgerMenu = ({ activeBurger, setActiveBurger }: BurgerMenuProps) => {
+export const BurgerMenu = ({ activeBurger, setActiveBurger, language, switchLanguage }: BurgerMenuProps) => {
   const handleCloseBurgerMenu = () => {
     setActiveBurger(false)
     document.body.style.overflow = 'auto'
@@ -48,7 +50,7 @@ export const BurgerMenu = ({ activeBurger, setActiveBurger }: BurgerMenuProps) =
         <div className={styles.burger_menu_body}>
           <nav className={styles.nav_menu}>
             <ul className={styles.nav__items}>
-              {HeaderLinks.map(({ id, name, href, index }: HeaderLinksProps) => (
+              {HeaderLinks.map(({ id, nameUa, nameRu, href }: HeaderLinksProps) => (
                 <li key={id} className={clsx(styles.item__nav)}>
                   <Link
                     onClick={handleCloseBurgerMenu}
@@ -59,10 +61,19 @@ export const BurgerMenu = ({ activeBurger, setActiveBurger }: BurgerMenuProps) =
                     offset={-180}
                     duration={600}
                   >
-                    {name}
+                    {language === 'ua' ? nameUa : nameRu}
                   </Link>
                 </li>
               ))}
+              <div className={styles.header_toggle}>
+                <div onClick={switchLanguage} className={clsx(styles.toggle)}>
+                  <span className={clsx(language === 'ua' ? styles.text__active : '')}>UA</span>
+                  <span className={clsx(language === 'ru' ? styles.text__active : '')}>RU</span>
+                  <div
+                    className={clsx(styles.toggle_button, language === 'ua' ? styles.toggle_button_active : '')}
+                  ></div>
+                </div>
+              </div>
             </ul>
           </nav>
         </div>

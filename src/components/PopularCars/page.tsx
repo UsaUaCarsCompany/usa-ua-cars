@@ -8,6 +8,7 @@ import { Autoplay, Pagination } from 'swiper/modules'
 import { PopularCarsSlideItem } from './PopularCarsSlideItem'
 import { PopularCarsData, PopularCarsDataProps } from '@/data/PopularCarsData'
 import IwantPopup from './IwantPopup/IwantPopup'
+import { useLanguage } from '@/ContextLanguage/LanguageContext'
 
 const chunk = (arr: PopularCarsDataProps[], size: number) =>
   Array.from({ length: Math.ceil(arr.length / size) }, (v, i) => arr.slice(i * size, i * size + size))
@@ -15,6 +16,7 @@ const chunk = (arr: PopularCarsDataProps[], size: number) =>
 const PopularCarsSlider = () => {
   const [openWantPopup, setOpenWantPopup] = useState(false)
   const [selectedCar, setSelectedCar] = useState<PopularCarsDataProps | null>(null)
+  const { language, switchLanguage } = useLanguage()
 
   const carsChunks = chunk(PopularCarsData, 4)
 
@@ -27,11 +29,20 @@ const PopularCarsSlider = () => {
 
   return (
     <>
-      <IwantPopup openWantPopup={openWantPopup} setOpenWantPopup={setOpenWantPopup} selectedCar={selectedCar} />
+      <IwantPopup
+        openWantPopup={openWantPopup}
+        setOpenWantPopup={setOpenWantPopup}
+        selectedCar={selectedCar}
+        language={language}
+      />
       <div className={styles.popCars__block} id="Popular">
         <div className="container">
           <div className={styles.inner__title}>
-            <h3>Самые популярные машины на сегодняшний день</h3>
+            <h3>
+              {language === 'ua'
+                ? 'Найпопулярніші машини на сьогоднішній день'
+                : 'Самые популярные машины на сегодняшний день'}
+            </h3>
           </div>
           <Swiper
             slidesPerView={1}
@@ -51,6 +62,7 @@ const PopularCarsSlider = () => {
                         openWantPopup={openWantPopup}
                         setOpenWantPopup={setOpenWantPopup}
                         onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleSelectCar(car, e)}
+                        language={language}
                       />
                     ))}
                   </ul>

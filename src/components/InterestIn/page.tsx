@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import { useForm } from 'react-hook-form'
 import { Goat, GoatProps, Key, KeyProps } from '@/selectData/KeyAndGoat'
 import { ToastContainer, toast } from 'react-toastify'
+import { useLanguage } from '@/ContextLanguage/LanguageContext'
 
 type SendFormProps = {
   typeOfGoat: string
@@ -15,6 +16,7 @@ type SendFormProps = {
 
 export const InterestIn = () => {
   const [sendLoading, setSendLoading] = useState(false)
+  const { language, switchLanguage } = useLanguage()
 
   const {
     register,
@@ -39,7 +41,7 @@ export const InterestIn = () => {
         console.log('Email sent successfully!')
         reset() // Очищення форми
         setSendLoading(false)
-        toast.success('Сообщение отправилось успешно!', {
+        toast.success(language === 'ua' ? 'Повідомлення відправлено успішно!' : 'Сообщение отправилось успешно!', {
           position: 'top-right',
           autoClose: 3000,
           hideProgressBar: false,
@@ -79,19 +81,21 @@ export const InterestIn = () => {
           <div className={styles.container__inner}>
             <div className={styles.inner__card}>
               <form onSubmit={handleSubmit(onSubmit)} className={styles.card__form__interest}>
-                <h2>Какой автомобиль вас интересует?</h2>
+                <h2>{language === 'ua' ? 'Який автомобіль вас цікавить?' : 'Какой автомобиль вас интересует?'}</h2>
                 <div className={styles.input__options}>
                   <select
-                    {...register('typeOfGoat', { required: 'Выберите тип кузова' })}
+                    {...register('typeOfGoat', {
+                      required: language === 'ua' ? 'Виберіть тип кузова' : 'Выберите тип кузова',
+                    })}
                     className={styles.select__options}
                     id="type_of_goat"
                   >
                     <option value="" selected={true}>
-                      Тип Кузова
+                      {language === 'ua' ? 'Тип Кузова' : 'Тип Кузова'}
                     </option>
                     {Goat.map(({ ...goat }: GoatProps) => (
-                      <option key={goat.id} value={goat.name}>
-                        {goat.name}
+                      <option key={goat.id} value={language === 'ua' ? goat.name.ua : goat.name.ru}>
+                        {language === 'ua' ? goat.name.ua : goat.name.ru}
                       </option>
                     ))}
                   </select>
@@ -99,17 +103,18 @@ export const InterestIn = () => {
                 </div>
                 <div className={styles.input__options}>
                   <select
-                    {...register('turnkeyBudget', { required: 'Выберите бюджет' })}
+                    {...register('turnkeyBudget', {
+                      required: language === 'ua' ? 'Виберіть бюджет' : 'Выберите бюджет',
+                    })}
                     className={styles.select__options}
                     id="turnkey_budget"
                   >
                     <option value="" selected={true}>
-                      Бюджет под ключ
+                      {language === 'ua' ? 'Бюджет під ключ' : 'Бюджет под ключ'}
                     </option>
-
                     {Key.map(({ ...key }: KeyProps) => (
-                      <option key={key.id} value={key.range}>
-                        {key.range}
+                      <option key={key.id} value={language === 'ua' ? key.range.ua : key.range.ru}>
+                        {language === 'ua' ? key.range.ua : key.range.ru}
                       </option>
                     ))}
                   </select>
@@ -118,10 +123,14 @@ export const InterestIn = () => {
                 <div className={styles.input_block}>
                   <input
                     {...register('phone', {
-                      required: 'Введите номер мобильного телефона',
+                      required:
+                        language === 'ua' ? 'Введіть номер мобільного телефону' : 'Введите номер мобильного телефона',
                       pattern: {
                         value: /((\+38)?\(?\d{3}\)?[\s\.-]?(\d{7}|\d{3}[\s\.-]\d{2}[\s\.-]\d{2}|\d{3}-\d{4}))/g,
-                        message: 'Введите корректный номер мобильного телефона',
+                        message:
+                          language === 'ua'
+                            ? 'Введіть коректний номер мобільного телефону'
+                            : 'Введите корректный номер мобильного телефона',
                       },
                     })}
                     type="tel"
@@ -133,14 +142,15 @@ export const InterestIn = () => {
                 <div className={styles.input_block}>
                   <input
                     {...register('email', {
-                      required: 'Введен неверный адрес эл. почты',
+                      required:
+                        language === 'ua' ? 'Введен неверный адрес эл. почты' : 'Введіть невірний адрес ел. пошти',
                       pattern: {
                         value: /^\S+@\S+\.\S+$/,
-                        message: 'Введите корректную эл. почту',
+                        message: language === 'ua' ? 'Введіть коректну ел. пошту' : 'Введите корректную эл. почту',
                       },
                     })}
                     type="email"
-                    placeholder="Емайл"
+                    placeholder={language === 'ua' ? 'Емайл' : 'Емайл'}
                     className={clsx(styles.input__field, errors.email ? styles.input__field__fail : '')}
                   />
                   {errors.email && <span className={styles.error_message}>{errors.email.message}</span>}
@@ -151,7 +161,7 @@ export const InterestIn = () => {
                   </div>
                 ) : (
                   <button type="submit" disabled={!isValid} className={styles.btn_contact}>
-                    <span>Получить подбор</span>
+                    <span>{language === 'ua' ? 'Отримати підбір' : 'Получить подбор'}</span>
                   </button>
                 )}
               </form>

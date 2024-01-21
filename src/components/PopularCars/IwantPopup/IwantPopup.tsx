@@ -18,9 +18,10 @@ type IwantPopupProps = {
   openWantPopup: boolean
   setOpenWantPopup: (isOpenContact: boolean) => void
   selectedCar: PopularCarsDataProps | null
+  language: string
 }
 
-const IwantPopup = ({ openWantPopup, setOpenWantPopup, selectedCar }: IwantPopupProps) => {
+const IwantPopup = ({ openWantPopup, setOpenWantPopup, selectedCar, language }: IwantPopupProps) => {
   const [sendLoading, setSendLoading] = useState(false)
   const {
     register,
@@ -54,7 +55,7 @@ const IwantPopup = ({ openWantPopup, setOpenWantPopup, selectedCar }: IwantPopup
         reset() // Очищення форми
         setSendLoading(false)
         handleCloseContactPopup()
-        toast.success('Сообщение отправилось успешно!', {
+        toast.success(language === 'ua' ? 'Повідомлення відправлено успішно!' : 'Сообщение отправилось успешно!', {
           position: 'top-right',
           autoClose: 3000,
           hideProgressBar: false,
@@ -99,12 +100,12 @@ const IwantPopup = ({ openWantPopup, setOpenWantPopup, selectedCar }: IwantPopup
       <div className={clsx(styles.modal_window, openWantPopup ? styles.show_window : '')}>
         <div className={styles.modal_header}>
           <button className={styles.modal_close} onClick={handleCloseContactPopup}>
-            Закрыть
+            {language === 'ua' ? 'Закрити' : 'Закрыть'}
           </button>
         </div>
         <div className={styles.modal_content}>
           <div className={styles.content_title}>
-            <h2>Свяжитесь с нами</h2>
+            <h2>{language === 'ua' ? "Зв'яжіться з нами" : 'Свяжитесь с нами'}</h2>
           </div>
           <div className={styles.inputs_inner}>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.inputs_form}>
@@ -120,12 +121,12 @@ const IwantPopup = ({ openWantPopup, setOpenWantPopup, selectedCar }: IwantPopup
               <div className={styles.input_block}>
                 <label className={styles.input_label}>
                   <FontAwesomeIcon icon={faUser} />
-                  Как к вам обращаться?
+                  {language === 'ua' ? 'Як до вас звертатися?' : 'Как к вам обращаться?'}
                 </label>
                 <input
-                  {...register('name', { required: 'Поле обязательно' })}
+                  {...register('name', { required: language === 'ua' ? "Поле обов'язкове" : 'Поле обязательно' })}
                   type="text"
-                  placeholder="Sonic"
+                  placeholder={language === 'ua' ? 'Сонік' : 'Sonic'}
                   className={clsx(styles.input__field, errors.name ? styles.input__field__fail : '')}
                 />
                 {errors.name && <span className={styles.error_message}>{errors.name.message}</span>}
@@ -133,14 +134,15 @@ const IwantPopup = ({ openWantPopup, setOpenWantPopup, selectedCar }: IwantPopup
               <div className={styles.input_block}>
                 <label className={styles.input_label}>
                   <FontAwesomeIcon icon={faEnvelope} />
-                  Емайл
+                  {language === 'ua' ? 'Емайл' : 'Эл. почта'}
                 </label>
                 <input
                   {...register('email', {
-                    required: 'Введен неверный адрес эл. почты',
+                    required:
+                      language === 'ua' ? 'Введено невірний адрес ел. пошти' : 'Введен неверный адрес эл. почты',
                     pattern: {
                       value: /^\S+@\S+\.\S+$/,
-                      message: 'Введите корректную эл. почту',
+                      message: language === 'ua' ? 'Введіть коректну ел. пошту' : 'Введите корректную эл. почту',
                     },
                   })}
                   type="email"
@@ -156,10 +158,14 @@ const IwantPopup = ({ openWantPopup, setOpenWantPopup, selectedCar }: IwantPopup
                 </label>
                 <input
                   {...register('phone', {
-                    required: 'Введите номер мобильного телефона',
+                    required:
+                      language === 'ua' ? 'Введіть номер мобільного телефону' : 'Введите номер мобильного телефона',
                     pattern: {
                       value: /((\+38)?\(?\d{3}\)?[\s\.-]?(\d{7}|\d{3}[\s\.-]\d{2}[\s\.-]\d{2}|\d{3}-\d{4}))/g,
-                      message: 'Введите корректный номер мобильного телефона',
+                      message:
+                        language === 'ua'
+                          ? 'Введіть коректний номер мобільного телефону'
+                          : 'Введите корректный номер мобильного телефона',
                     },
                   })}
                   type="tel"
@@ -175,7 +181,7 @@ const IwantPopup = ({ openWantPopup, setOpenWantPopup, selectedCar }: IwantPopup
                 </div>
               ) : (
                 <button type="submit" disabled={!isValid} className={styles.btn_contact}>
-                  <span>Отправить</span>
+                  <span>{language === 'ua' ? 'Відправити' : 'Отправить'}</span>
                 </button>
               )}
             </form>
