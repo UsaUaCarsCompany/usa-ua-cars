@@ -1,5 +1,5 @@
 'use client'
-import React, { createContext, useContext, ReactNode, useState } from 'react'
+import React, { createContext, useContext, ReactNode, useState, useEffect } from 'react'
 
 interface LanguageContextProps {
   language: string
@@ -21,11 +21,25 @@ interface LanguageProviderProps {
 }
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguage] = useState<string>('ua')
+  const [language, setLanguage] = useState<string>(() => {
+    // Зчитуємо значення 'language' з localStorage, якщо воно є
+    const storedLanguage = localStorage.getItem('language')
+    return storedLanguage || 'ua' // Повертаємо 'ua', якщо значення в localStorage відсутнє
+  })
 
   const switchLanguage = (): void => {
-    setLanguage((prevLanguage) => (prevLanguage === 'ua' ? 'ru' : 'ua'))
+    setLanguage((prevLanguage) => {
+      const newLanguage = prevLanguage === 'ua' ? 'ru' : 'ua'
+      // Зберігаємо нове значення 'language' в localStorage
+      localStorage.setItem('language', newLanguage)
+      return newLanguage
+    })
   }
+
+  useEffect(() => {
+    // Оновлюємо localStorage, коли змінюється значення 'language'
+    localStorage.setItem('language', language)
+  }, [language])
 
   const contextValue: LanguageContextProps = { language, switchLanguage }
 
