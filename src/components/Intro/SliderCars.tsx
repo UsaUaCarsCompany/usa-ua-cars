@@ -10,6 +10,8 @@ import { Autoplay, Navigation } from 'swiper/modules'
 import Image from 'next/image'
 import { CarsDataProps, CarsData } from '@/data/CarsData'
 import { useLanguage } from '@/ContextLanguage/LanguageContext'
+import { motion } from 'framer-motion'
+import { leftAnimations } from '@/animations/page'
 
 export const CarsSlider = () => {
   const { language, switchLanguage } = useLanguage()
@@ -22,13 +24,13 @@ export const CarsSlider = () => {
           delay: 7500,
         }}
         navigation={true}
-        speed={1000}
+        speed={800}
         slidesPerView={1}
         className="CarsSlider"
       >
         {CarsData.map(({ ...car }: CarsDataProps) => (
           <SwiperSlide key={car.id}>
-            <div className={styles.slider_car_block}>
+            <motion.div initial="hidden" whileInView="visible" className={styles.slider_car_block}>
               <div className={styles.slider_car_inner}>
                 <div className={styles.slider_car_content}>
                   <h1 className={styles.slider_car_title}>{car.title}</h1>
@@ -37,11 +39,11 @@ export const CarsSlider = () => {
                   </p>
                 </div>
 
-                <div className={styles.slider_car_image}>
+                <motion.div variants={leftAnimations} custom={1} className={styles.slider_car_image}>
                   <Image src={`/cars/${car.image}.png`} width={590} height={323} alt={car.title} />
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           </SwiperSlide>
         ))}
       </Swiper>

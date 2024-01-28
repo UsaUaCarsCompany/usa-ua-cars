@@ -7,12 +7,21 @@ import Image from 'next/image'
 import clsx from 'clsx'
 import { SocialsData, SocialsDataProps } from '@/data/SocialsData'
 import { useLanguage } from '@/ContextLanguage/LanguageContext'
+import { motion } from 'framer-motion'
+import { bottomAnimations } from '@/animations/page'
 
 export const Footer = () => {
   const { language, switchLanguage } = useLanguage()
 
   return (
-    <footer className={styles.footer__block}>
+    <motion.footer
+      viewport={{ once: true }}
+      initial="hidden"
+      whileInView="visible"
+      variants={bottomAnimations}
+      custom={2}
+      className={styles.footer__block}
+    >
       <div className="container">
         <div className={styles.footer__inner}>
           <div className={styles.inner__logo__links}>
@@ -44,8 +53,11 @@ export const Footer = () => {
             </ul>
           </div>
         </div>
+        <div style={{ textAlign: 'center', marginTop: '60px', opacity: '50%', fontSize: '14px' }}>
+          Copyright © 2023. All rights reserved.
+        </div>
       </div>
-    </footer>
+    </motion.footer>
   )
 }
 

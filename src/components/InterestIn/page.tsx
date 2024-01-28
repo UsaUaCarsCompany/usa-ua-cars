@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form'
 import { Goat, GoatProps, Key, KeyProps } from '@/selectData/KeyAndGoat'
 import { ToastContainer, toast } from 'react-toastify'
 import { useLanguage } from '@/ContextLanguage/LanguageContext'
+import { motion } from 'framer-motion'
+import { bottomAnimations } from '@/animations/page'
 
 type SendFormProps = {
   typeOfGoat: string
@@ -78,7 +80,14 @@ export const InterestIn = () => {
       <div className={styles.interest__block}>
         <div className={styles.block__overlay}></div>
         <div className="container">
-          <div className={styles.container__inner}>
+          <motion.div
+            viewport={{ once: true }}
+            initial="hidden"
+            whileInView="visible"
+            variants={bottomAnimations}
+            custom={2}
+            className={styles.container__inner}
+          >
             <div className={styles.inner__card}>
               <form onSubmit={handleSubmit(onSubmit)} className={styles.card__form__interest}>
                 <h2>{language === 'ua' ? 'Який автомобіль вас цікавить?' : 'Какой автомобиль вас интересует?'}</h2>
@@ -166,7 +175,7 @@ export const InterestIn = () => {
                 )}
               </form>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </>

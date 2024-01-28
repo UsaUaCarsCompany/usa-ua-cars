@@ -12,7 +12,7 @@ export const HeaderLinks: HeaderLinksProps[] = [
     nameUa: 'Головна',
     nameRu: 'Главная',
     href: 'main',
-    index: 0.8,
+    index: 0.5,
   },
 
   {
@@ -20,14 +20,14 @@ export const HeaderLinks: HeaderLinksProps[] = [
     nameUa: 'Як ми працюємо',
     nameRu: 'Как мы работаем',
     href: 'howWeWork',
-    index: 1,
+    index: 0.6,
   },
   {
     id: 76481,
     nameUa: 'Популярне',
     nameRu: 'Популярное',
     href: 'Popular',
-    index: 1.2,
+    index: 0.7,
   },
 
   {
@@ -35,13 +35,13 @@ export const HeaderLinks: HeaderLinksProps[] = [
     nameUa: 'Розмитнення',
     nameRu: 'Растаможка',
     href: 'Clearance',
-    index: 1.2,
+    index: 0.8,
   },
   {
     id: 989,
     nameUa: 'FAQ',
     nameRu: 'FAQ',
     href: 'faq',
-    index: 1.2,
+    index: 0.9,
   },
 ]

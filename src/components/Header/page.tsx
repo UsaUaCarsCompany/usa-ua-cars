@@ -8,6 +8,8 @@ import { BurgerMenu } from '../BurgerMenu/BurgerMenu'
 import { HeaderLinks, HeaderLinksProps } from '@/data/HeaderLinks'
 import ContactPopup from '../ContactPopup/ContactPopup'
 import { useLanguage } from '@/ContextLanguage/LanguageContext'
+import { motion } from 'framer-motion'
+import { bottomAnimations, rightAnimations } from '@/animations/page'
 
 const Header = () => {
   const [scroll, setScroll] = useState(0)
@@ -45,26 +47,38 @@ const Header = () => {
         language={language}
         switchLanguage={switchLanguage}
       />
-      <header className={clsx(styles.header, scroll < 50 ? '' : styles.headerBg)}>
+      <motion.header
+        viewport={{ once: true }}
+        initial="hidden"
+        whileInView="visible"
+        className={clsx(styles.header, scroll < 50 ? '' : styles.headerBg)}
+      >
         <div className="container">
           <div className={styles.header__content}>
-            <Link className={styles.header__logo} to="main" spy={true} smooth={true} offset={-180} duration={600}>
-              <Image src="/logo/logo5.png" width={100} height={50} alt="cars from USA" />
-            </Link>
+            <motion.div variants={rightAnimations} custom={0.1}>
+              <Link className={styles.header__logo} to="main" spy={true} smooth={true} offset={-180} duration={600}>
+                <Image src="/logo/logo5.png" width={100} height={50} alt="cars from USA" />
+              </Link>
+            </motion.div>
             <nav className={styles.header__nav}>
               <ul className={styles.nav__items}>
-                {HeaderLinks.map(({ id, nameUa, nameRu, href }: HeaderLinksProps) => (
-                  <li key={id} className={clsx(styles.item__nav)}>
+                {HeaderLinks.map(({ id, nameUa, nameRu, href, index }: HeaderLinksProps) => (
+                  <motion.li variants={bottomAnimations} custom={index} key={id} className={clsx(styles.item__nav)}>
                     <Link activeClass={styles.active} to={href} spy={true} smooth={true} offset={-180} duration={600}>
                       {language === 'ua' ? nameUa : nameRu}
                     </Link>
-                  </li>
+                  </motion.li>
                 ))}
-                <button className={styles.btn_contact} onClick={openContactPopup}>
+                <motion.button
+                  variants={bottomAnimations}
+                  custom={1}
+                  className={styles.btn_contact}
+                  onClick={openContactPopup}
+                >
                   <span>{language === 'ua' ? "Зв'яжіться з нами" : 'Свяжитесь с нами'}</span>
-                </button>
+                </motion.button>
 
-                <div className={styles.header_toggle}>
+                <motion.div variants={bottomAnimations} custom={1.1} className={styles.header_toggle}>
                   <div onClick={switchLanguage} className={clsx(styles.toggle)}>
                     <span className={clsx(language === 'ua' ? styles.text__active : '')}>UA</span>
                     <span className={clsx(language === 'ru' ? styles.text__active : '')}>RU</span>
@@ -72,7 +86,7 @@ const Header = () => {
                       className={clsx(styles.toggle_button, language === 'ua' ? styles.toggle_button_active : '')}
                     ></div>
                   </div>
-                </div>
+                </motion.div>
                 <button
                   className={clsx(styles.nav_menu_burger, activeBurger ? styles.nav_menu_burger_active : '')}
                   type="button"
@@ -84,7 +98,7 @@ const Header = () => {
             </nav>
           </div>
         </div>
-      </header>
+      </motion.header>
     </>
   )
 }

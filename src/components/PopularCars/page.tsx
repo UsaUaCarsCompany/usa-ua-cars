@@ -9,6 +9,8 @@ import { PopularCarsSlideItem } from './PopularCarsSlideItem'
 import { PopularCarsData, PopularCarsDataProps } from '@/data/PopularCarsData'
 import IwantPopup from './IwantPopup/IwantPopup'
 import { useLanguage } from '@/ContextLanguage/LanguageContext'
+import { motion } from 'framer-motion'
+import { bottomAnimations, opacityAnimations } from '@/animations/page'
 
 const chunk = (arr: PopularCarsDataProps[], size: number) =>
   Array.from({ length: Math.ceil(arr.length / size) }, (v, i) => arr.slice(i * size, i * size + size))
@@ -35,43 +37,51 @@ const PopularCarsSlider = () => {
         selectedCar={selectedCar}
         language={language}
       />
-      <div className={styles.popCars__block} id="Popular">
+      <motion.div
+        className={styles.popCars__block}
+        viewport={{ once: true }}
+        initial="hidden"
+        whileInView="visible"
+        id="Popular"
+      >
         <div className="container">
           <div className={styles.inner__title}>
-            <h3>
+            <motion.h3 variants={bottomAnimations} custom={1}>
               {language === 'ua'
                 ? 'Найпопулярніші машини на сьогоднішній день'
                 : 'Самые популярные машины на сегодняшний день'}
-            </h3>
+            </motion.h3>
           </div>
-          <Swiper
-            slidesPerView={1}
-            pagination={{ clickable: true }}
-            modules={[Pagination, Autoplay]}
-            loop={true}
-            className="CarsSliderPopular"
-          >
-            {carsChunks.map((carsGroup, index) => (
-              <SwiperSlide key={index}>
-                <div className={styles.container__inner}>
-                  <ul className={styles.popCars__list}>
-                    {carsGroup.map((car: PopularCarsDataProps) => (
-                      <PopularCarsSlideItem
-                        key={car.id}
-                        car={car}
-                        openWantPopup={openWantPopup}
-                        setOpenWantPopup={setOpenWantPopup}
-                        onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleSelectCar(car, e)}
-                        language={language}
-                      />
-                    ))}
-                  </ul>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          <motion.div variants={opacityAnimations} custom={2}>
+            <Swiper
+              slidesPerView={1}
+              pagination={{ clickable: true }}
+              modules={[Pagination, Autoplay]}
+              loop={true}
+              className="CarsSliderPopular"
+            >
+              {carsChunks.map((carsGroup, index) => (
+                <SwiperSlide key={index}>
+                  <div className={styles.container__inner}>
+                    <ul className={styles.popCars__list}>
+                      {carsGroup.map((car: PopularCarsDataProps) => (
+                        <PopularCarsSlideItem
+                          key={car.id}
+                          car={car}
+                          openWantPopup={openWantPopup}
+                          setOpenWantPopup={setOpenWantPopup}
+                          onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleSelectCar(car, e)}
+                          language={language}
+                        />
+                      ))}
+                    </ul>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </>
   )
 }

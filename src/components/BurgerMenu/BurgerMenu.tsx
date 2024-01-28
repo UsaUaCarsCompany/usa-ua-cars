@@ -5,6 +5,8 @@ import React from 'react'
 
 import styles from './BurgerMenuStyle.module.sass'
 import { HeaderLinks, HeaderLinksProps } from '@/data/HeaderLinks'
+import { motion } from 'framer-motion'
+import { leftAnimations } from '@/animations/page'
 
 type BurgerMenuProps = {
   activeBurger: boolean
@@ -28,7 +30,11 @@ export const BurgerMenu = ({ activeBurger, setActiveBurger, language, switchLang
       ></div>
       {/* Задній план ===============*/}
       {/* Контентна частина ================== */}
-      <div className={clsx(styles.burger_window, activeBurger ? styles.burger_window_show : '')}>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        className={clsx(styles.burger_window, activeBurger ? styles.burger_window_show : '')}
+      >
         <div className={styles.burger_menu_header}>
           {/* header */}
           <Link
@@ -50,8 +56,8 @@ export const BurgerMenu = ({ activeBurger, setActiveBurger, language, switchLang
         <div className={styles.burger_menu_body}>
           <nav className={styles.nav_menu}>
             <ul className={styles.nav__items}>
-              {HeaderLinks.map(({ id, nameUa, nameRu, href }: HeaderLinksProps) => (
-                <li key={id} className={clsx(styles.item__nav)}>
+              {HeaderLinks.map(({ id, nameUa, nameRu, href, index }: HeaderLinksProps) => (
+                <motion.li variants={leftAnimations} custom={index} key={id} className={clsx(styles.item__nav)}>
                   <Link
                     onClick={handleCloseBurgerMenu}
                     activeClass={styles.active}
@@ -63,7 +69,7 @@ export const BurgerMenu = ({ activeBurger, setActiveBurger, language, switchLang
                   >
                     {language === 'ua' ? nameUa : nameRu}
                   </Link>
-                </li>
+                </motion.li>
               ))}
               <div className={styles.header_toggle}>
                 <div onClick={switchLanguage} className={clsx(styles.toggle)}>
@@ -77,7 +83,7 @@ export const BurgerMenu = ({ activeBurger, setActiveBurger, language, switchLang
             </ul>
           </nav>
         </div>
-      </div>
+      </motion.div>
       {/* Контентна частина ================== */}
     </>
   )

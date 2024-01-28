@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { AccordionsData, AccordionsDataProps } from '@/data/AccordionsData'
 import { useLanguage } from '@/ContextLanguage/LanguageContext'
+import { motion } from 'framer-motion'
+import { leftAnimations, rightAnimations } from '@/animations/page'
 
 interface AccordionState {
   [id: number]: boolean
@@ -29,17 +31,23 @@ export const Questions = () => {
   }
 
   return (
-    <div className={styles.questions__block} id="faq">
+    <motion.div initial="hidden" whileInView="visible" className={styles.questions__block} id="faq">
       <div className="container">
         <div className={styles.container__inner}>
           <div className={styles.inner__title}>
-            <h3>{language === 'ua' ? 'Часті запитання' : 'Часто задаваемые вопросы'}</h3>
-            <span />
+            <motion.h3 variants={rightAnimations} custom={1}>
+              {language === 'ua' ? 'Часті запитання' : 'Часто задаваемые вопросы'}
+            </motion.h3>
+            <motion.span variants={rightAnimations} custom={1.6} />
           </div>
           <div className={styles.inner__questions}>
             <ul className={styles.questions__accordions}>
               {AccordionsData.map(({ id, ...accord }: AccordionsDataProps) => (
-                <li
+                <motion.li
+                  initial="hidden"
+                  whileInView="visible"
+                  variants={accord.anim === 'right' ? rightAnimations : leftAnimations}
+                  custom={accord.index}
                   key={id}
                   className={clsx(styles.accordion__block, openAccordions[id] ? styles.accordion__block__active : '')}
                 >
@@ -60,13 +68,13 @@ export const Questions = () => {
                       <div className={styles.content_text}>{language === 'ua' ? accord.text.ua : accord.text.ru}</div>
                     </div>
                   </div>
-                </li>
+                </motion.li>
               ))}
             </ul>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

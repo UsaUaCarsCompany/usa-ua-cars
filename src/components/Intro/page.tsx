@@ -7,6 +7,8 @@ import { OptionsList, OptionsListData } from '../../selectData/Brands'
 import { YearFrom, YearFromProps } from '@/selectData/YearFrom'
 import { YearTo, YearToProps } from '@/selectData/YearTo'
 import { useLanguage } from '@/ContextLanguage/LanguageContext'
+import { motion } from 'framer-motion'
+import { leftAnimations, rightAnimations } from '@/animations/page'
 
 const Intro = () => {
   const [selectedWebsite, setSelectedWebsite] = useState('copart')
@@ -88,10 +90,16 @@ const Intro = () => {
   return (
     <>
       <div className={styles.wrapp}>
-        <section className={styles.intro} id="main">
+        <motion.section
+          viewport={{ once: true }}
+          initial="hidden"
+          whileInView="visible"
+          className={styles.intro}
+          id="main"
+        >
           <div className="container">
             <div className={styles.intro__inner}>
-              <div className={styles.inner__searching__block}>
+              <motion.div variants={rightAnimations} custom={0.1} className={styles.inner__searching__block}>
                 <form
                   onSubmit={(e) => {
                     e.preventDefault()
@@ -184,13 +192,13 @@ const Intro = () => {
                     <span>{language === 'ua' ? 'ПОШУК АВТО' : 'ПОИСК АВТО'}</span>
                   </button>
                 </form>
-              </div>
-              <div className={styles.slider__cars}>
+              </motion.div>
+              <motion.div variants={leftAnimations} custom={0.2} className={styles.slider__cars}>
                 <CarsSlider />
-              </div>
+              </motion.div>
             </div>
           </div>
-        </section>
+        </motion.section>
         <div className={styles.arrow_down}></div>
       </div>
     </>
