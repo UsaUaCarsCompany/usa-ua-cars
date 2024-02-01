@@ -10,47 +10,11 @@ export type CarsDataProps = {
 
 export const CarsData: CarsDataProps[] = [
   {
-    id: 2261,
-    title: 'VOLKSWAGEN PASSAT',
-    price: {
-      ua: 'від 6 600 до 13 000 $',
-      ru: 'от 6 600 до 13 000 $',
-    },
-    image: 'car1',
-  },
-  {
-    id: 4089,
-    title: 'VOLKSWAGEN JETTA',
-    price: {
-      ua: 'від 2 000 до 8 000 $',
-      ru: 'от 2 000 до 8 000 $',
-    },
-    image: 'car2',
-  },
-  {
-    id: 509,
-    title: 'FORD FOCUS',
-    price: {
-      ua: 'від 4 600 до 10 999 $',
-      ru: 'от 4 600 до 10 999 $',
-    },
-    image: 'car3',
-  },
-  {
-    id: 1579,
-    title: 'FORD ESCAPE',
-    price: {
-      ua: 'від 6 000 до 12 000 $',
-      ru: 'от 6 000 до 12 000 $',
-    },
-    image: 'car4',
-  },
-  {
     id: 9389,
     title: 'FORD FUSION',
     price: {
-      ua: 'від 6 000 до 14 000 $',
-      ru: 'от 6 000 до 14 000 $',
+      ua: 'від 8 700 $',
+      ru: 'от 8 700 $',
     },
     image: 'car5',
   },
@@ -58,8 +22,8 @@ export const CarsData: CarsDataProps[] = [
     id: 6995,
     title: 'NISSAN ROGUE',
     price: {
-      ua: 'від 6 000 до 19 000 $',
-      ru: 'от 6 000 до 19 000 $',
+      ua: 'від 9 900 $',
+      ru: 'от 9 900 $',
     },
     image: 'car6',
   },
@@ -67,8 +31,8 @@ export const CarsData: CarsDataProps[] = [
     id: 3,
     title: 'JEEP COMPASS',
     price: {
-      ua: 'від 18 000 до 20 000 $',
-      ru: 'от 18 000 до 20 000 $',
+      ua: 'від 13 700 $',
+      ru: 'от 13 700 $',
     },
     image: 'car7',
   },
@@ -76,26 +40,37 @@ export const CarsData: CarsDataProps[] = [
     id: 6525,
     title: 'JEEP CHEROKEE',
     price: {
-      ua: 'від 13 000 до 15 000 $',
-      ru: 'от 13 000 до 15 000 $',
+      ua: 'від 17 100 $',
+      ru: 'от 17 100 $',
     },
     image: 'car8',
   },
+
   {
-    id: 9770,
-    title: 'DODGE JOURNEY',
+    id: 1001,
+    title: 'TESLA MODEL Y',
     price: {
-      ua: 'від 6 782 до 12 000 $',
-      ru: 'от 6 782 до 12 000 $',
+      ua: 'від 25 500 $',
+      ru: 'от 25 500 $',
     },
-    image: 'car9',
+    image: 'car17',
   },
+  {
+    id: 1002,
+    title: 'TESLA MODEL 3',
+    price: {
+      ua: 'від 14 500 $',
+      ru: 'от 14 500 $',
+    },
+    image: 'car18',
+  },
+
   {
     id: 8715,
     title: 'AUDI Q5',
     price: {
-      ua: 'від 15 000 до 19 000 $',
-      ru: 'от 15 000 до 19 000 $',
+      ua: 'від 15 000 $',
+      ru: 'от 15 000 $',
     },
     image: 'car10',
   },
@@ -103,8 +78,8 @@ export const CarsData: CarsDataProps[] = [
     id: 5566,
     title: 'TESLA MODEL X',
     price: {
-      ua: 'від 45 000 до 60 000 $',
-      ru: 'от 45 000 до 60 000 $',
+      ua: 'від 34 200 $',
+      ru: 'от 34 200 $',
     },
     image: 'car13',
   },
@@ -112,8 +87,8 @@ export const CarsData: CarsDataProps[] = [
     id: 7788,
     title: 'VOLKSWAGEN TIGUAN',
     price: {
-      ua: 'від 22 000 до 28 000 $',
-      ru: 'от 22 000 до 28 000 $',
+      ua: 'від 22 000 $',
+      ru: 'от 22 000 $',
     },
     image: 'car14',
   },
@@ -121,8 +96,8 @@ export const CarsData: CarsDataProps[] = [
     id: 9900,
     title: 'KIA NIRO',
     price: {
-      ua: 'від 15 000 до 22 000 $',
-      ru: 'от 15 000 до 22 000 $',
+      ua: 'від 15 000 $',
+      ru: 'от 15 000 $',
     },
     image: 'car15',
   },
@@ -130,9 +105,38 @@ export const CarsData: CarsDataProps[] = [
     id: 1111,
     title: 'HONDA CLARITY',
     price: {
-      ua: 'від 20 000 до 27 000 $',
-      ru: 'от 20 000 до 27 000 $',
+      ua: 'від 20 000 $',
+      ru: 'от 20 000 $',
     },
     image: 'car16',
+  },
+  {
+    id: 1004,
+    title: 'MAZDA CX 5',
+    price: {
+      ua: 'від 15 000 $',
+      ru: 'от 15 000 $',
+    },
+    image: 'car20',
+  },
+
+  {
+    id: 1005,
+    title: 'TOYOTA CAMRY HYBRID',
+    price: {
+      ua: 'від 16 500 $',
+      ru: 'от 16 500 $',
+    },
+    image: 'car21',
+  },
+
+  {
+    id: 1006,
+    title: 'BMW X3',
+    price: {
+      ua: 'від 17 500 $',
+      ru: 'от 17 500 $',
+    },
+    image: 'car22',
   },
 ]

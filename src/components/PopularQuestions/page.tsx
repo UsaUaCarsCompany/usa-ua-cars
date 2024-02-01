@@ -31,7 +31,13 @@ export const Questions = () => {
   }
 
   return (
-    <motion.div initial="hidden" whileInView="visible" className={styles.questions__block} id="faq">
+    <motion.div
+      viewport={{ once: true }}
+      initial="hidden"
+      whileInView="visible"
+      className={styles.questions__block}
+      id="faq"
+    >
       <div className="container">
         <div className={styles.container__inner}>
           <div className={styles.inner__title}>
@@ -46,6 +52,7 @@ export const Questions = () => {
                 <motion.li
                   initial="hidden"
                   whileInView="visible"
+                  viewport={{ once: true }}
                   variants={accord.anim === 'right' ? rightAnimations : leftAnimations}
                   custom={accord.index}
                   key={id}

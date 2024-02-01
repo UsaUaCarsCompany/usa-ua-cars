@@ -6,23 +6,23 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { Autoplay, Pagination } from 'swiper/modules'
 import { PopularCarsSlideItem } from './PopularCarsSlideItem'
-import { PopularCarsData, PopularCarsDataProps } from '@/data/PopularCarsData'
 import IwantPopup from './IwantPopup/IwantPopup'
 import { useLanguage } from '@/ContextLanguage/LanguageContext'
 import { motion } from 'framer-motion'
 import { bottomAnimations, opacityAnimations } from '@/animations/page'
+import { CarsData, CarsDataProps } from '@/data/CarsData'
 
-const chunk = (arr: PopularCarsDataProps[], size: number) =>
+const chunk = (arr: CarsDataProps[], size: number) =>
   Array.from({ length: Math.ceil(arr.length / size) }, (v, i) => arr.slice(i * size, i * size + size))
 
 const PopularCarsSlider = () => {
   const [openWantPopup, setOpenWantPopup] = useState(false)
-  const [selectedCar, setSelectedCar] = useState<PopularCarsDataProps | null>(null)
+  const [selectedCar, setSelectedCar] = useState<CarsDataProps | null>(null)
   const { language, switchLanguage } = useLanguage()
 
-  const carsChunks = chunk(PopularCarsData, 4)
+  const carsChunks = chunk(CarsData, 4)
 
-  const handleSelectCar = (car: PopularCarsDataProps, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleSelectCar = (car: CarsDataProps, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     setSelectedCar(car)
     setOpenWantPopup(true)
@@ -64,7 +64,7 @@ const PopularCarsSlider = () => {
                 <SwiperSlide key={index}>
                   <div className={styles.container__inner}>
                     <ul className={styles.popCars__list}>
-                      {carsGroup.map((car: PopularCarsDataProps) => (
+                      {carsGroup.map((car: CarsDataProps) => (
                         <PopularCarsSlideItem
                           key={car.id}
                           car={car}

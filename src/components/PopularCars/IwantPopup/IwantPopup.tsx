@@ -1,11 +1,11 @@
 import clsx from 'clsx'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import styles from './IwantPopupStyles.module.sass'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faEnvelope, faPhone, faMessage } from '@fortawesome/free-solid-svg-icons'
 import { ToastContainer, toast } from 'react-toastify'
-import { PopularCarsDataProps } from '@/data/PopularCarsData'
+import { CarsDataProps } from '@/data/CarsData'
 
 type ContactFormValues = {
   name: string
@@ -17,12 +17,18 @@ type ContactFormValues = {
 type IwantPopupProps = {
   openWantPopup: boolean
   setOpenWantPopup: (isOpenContact: boolean) => void
-  selectedCar: PopularCarsDataProps | null
+  selectedCar: CarsDataProps | null
   language: string
 }
 
 const IwantPopup = ({ openWantPopup, setOpenWantPopup, selectedCar, language }: IwantPopupProps) => {
   const [sendLoading, setSendLoading] = useState(false)
+  const [selectedCarTitle, setSelectedCarTitle] = useState(selectedCar?.title || '')
+
+  useEffect(() => {
+    setSelectedCarTitle(selectedCar?.title || '')
+  }, [selectedCar])
+
   const {
     register,
     handleSubmit,
@@ -42,12 +48,14 @@ const IwantPopup = ({ openWantPopup, setOpenWantPopup, selectedCar, language }: 
     setSendLoading(true)
 
     try {
+      const dataWithCar = { ...data, car: selectedCarTitle }
+
       const response = await fetch('/api/sendWant', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(dataWithCar),
       })
 
       if (response.ok) {
@@ -113,7 +121,7 @@ const IwantPopup = ({ openWantPopup, setOpenWantPopup, selectedCar, language }: 
                 <input
                   {...register('car')}
                   type="text"
-                  value={selectedCar?.name || ''}
+                  value={selectedCarTitle}
                   readOnly
                   className={clsx(styles.input__field)}
                 />
