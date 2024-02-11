@@ -35,7 +35,7 @@ export const CarsSlider = () => {
                 <div className={styles.slider_car_content}>
                   <h1 className={styles.slider_car_title}>{car.title}</h1>
                   <p className={styles.slider_car_subtitle}>
-                    {language === 'ua' ? 'Ціна в Америці' : 'Цена в Америке'}{' '}
+                    {language === 'ua' ? 'Ціна в Україні' : 'Цена в Украине'} {''}
                     <span>{language === 'ua' ? car.price.ua : car.price.ru}</span>
                   </p>
                 </div>

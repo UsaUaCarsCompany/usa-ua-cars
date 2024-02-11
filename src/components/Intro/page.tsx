@@ -85,8 +85,6 @@ const Intro = () => {
   const filteredBrand = OptionsList.find((brand) => brand.name === selectedBrand)
   const filteredModels = filteredBrand ? filteredBrand.models || [] : []
 
-  console.log(selectedBrand, selectedModel, selectedYearFrom, selectedYearTo, selectedWebsite)
-
   return (
     <>
       <div className={styles.wrapp}>

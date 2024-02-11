@@ -35,6 +35,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <link rel="mask-icon" href="/logo/safari-pinned-tab.svg" color="#202124" />
         <meta name="msapplication-TileColor" content="#202124" />
         <meta name="theme-color" content="#ffffff" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <body>
         <div className="wrapper">

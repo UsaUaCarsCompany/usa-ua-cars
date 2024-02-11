@@ -105,8 +105,8 @@ export const CarsData: CarsDataProps[] = [
     id: 1111,
     title: 'HONDA CLARITY',
     price: {
-      ua: 'від 20 000 $',
-      ru: 'от 20 000 $',
+      ua: 'від 14000 $',
+      ru: 'от 14000 $',
     },
     image: 'car16',
   },
