@@ -11,8 +11,8 @@ const Home = () => {
       <HowWeWork />
       <PopularCars />
       <InterestIn />
-      <Questions />
       <CarCustomsCalculator />
+      <Questions />
     </main>
   )
 }

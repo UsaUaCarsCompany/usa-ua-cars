@@ -1,6 +1,11 @@
 'use client'
 import { AgeCars } from '@/selectData/AgeCars'
 import React, { useState } from 'react'
+import styles from './CalculateStyles.module.sass'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
+import { bottomAnimations, leftAnimations } from '@/animations/page'
+import { useLanguage } from '@/ContextLanguage/LanguageContext'
 
 export const CarCustomsCalculator: React.FC = () => {
   const [auctionValue, setAuctionValue] = useState<number>(0)
@@ -22,6 +27,8 @@ export const CarCustomsCalculator: React.FC = () => {
   const [expeditingCost, setExpeditingCost] = useState<number>(0)
   const [carCarrierCost, setCarCarrierCost] = useState<number>(0)
   const [summary, setSummary] = useState<number>(0)
+
+  const { language, switchLanguage } = useLanguage()
 
   // const [selectedAuction, setSelectedAuction] = useState<string>('copart')
   const handleAuctionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -108,101 +115,183 @@ export const CarCustomsCalculator: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>Калькулятор доставки та розмитнення авто з США в Україну</h1>
-      <div>
-        <label>
-          Вартість авто на аукціоні $:
-          <input type="number" placeholder="$5000" onChange={(e) => setAuctionValue(parseInt(e.target.value, 10))} />
-        </label>
-      </div>
+    <div className={styles.calc__block} id="Clearance">
+      <div className="container">
+        <motion.div viewport={{ once: true }} initial="hidden" whileInView="visible" className={styles.calc__header}>
+          <motion.h1 variants={bottomAnimations} custom={1}>
+            {language === 'ua'
+              ? 'Калькулятор доставки та розмитнення авто із США в Україну'
+              : 'Калькулятор доставки и растаможки авто из США в Украину'}
+          </motion.h1>
+          <div className={styles.calc__subtitle__pic}>
+            <motion.span variants={bottomAnimations} custom={1.2}>
+              {language === 'ua'
+                ? 'За допомогою нашого онлайн-калькулятора ви можете розрахувати вартість авто із Америки'
+                : 'С помощью нашего онлайн-калькулятора вы можете рассчитать стоимость авто из Америки'}
+            </motion.span>
+            <motion.div variants={leftAnimations} custom={2} className={styles.subtitle__pic}>
+              <Image src="/calc/calcCar.png" width={288} height={147} alt="Ferrari" />
+            </motion.div>
+          </div>
+        </motion.div>
+        <motion.div
+          viewport={{ once: true }}
+          initial="hidden"
+          whileInView="visible"
+          variants={bottomAnimations}
+          custom={2}
+          className={styles.container__inner}
+        >
+          <div className={styles.inner__form}>
+            <h2>{language === 'ua' ? 'Вхідні дані' : 'Входные данные'}</h2>
+            <div className={styles.input_block}>
+              <label>{language === 'ua' ? 'Вартість авто на аукціоні $:' : 'Стоимость авто на аукционе $:'}</label>
+              <input
+                className={styles.input__field}
+                type="number"
+                placeholder="$5000"
+                onChange={(e) => setAuctionValue(parseInt(e.target.value, 10))}
+              />
+            </div>
 
-      <div>
-        <label>
-          Аукціон:
-          <select onChange={handleAuctionChange}>
-            <option value="" disabled selected>
-              Аукціон
-            </option>
-            <option value="copart">Copart</option>
-            <option value="iaai">IAAI</option>
-          </select>
-        </label>
-      </div>
+            <div className={styles.input__options}>
+              <label>{language === 'ua' ? 'Аукціон:' : 'Аукцион:'}</label>
 
-      <div>
-        <label>
-          Тип транспорту:
-          <select onChange={(e) => setVehicleType(e.target.value)}>
-            <option value="" disabled selected>
-              Виберіть
-            </option>
-            <option value="car">Авто</option>
-            <option value="SUV">SUV</option>
-          </select>
-        </label>
-      </div>
+              <select className={styles.select__options} onChange={handleAuctionChange}>
+                <option value="" disabled selected>
+                  {language === 'ua' ? 'Аукціон:' : 'Аукцион:'}
+                </option>
+                <option value="copart">Copart</option>
+                <option value="iaai">IAAI</option>
+              </select>
+            </div>
 
-      <div>
-        <label>
-          Тип двигуна:
-          <select onChange={(e) => setEngineType(e.target.value)}>
-            <option value="" disabled selected>
-              Виберіть
-            </option>
-            <option value="petrol">Бензин/Газ</option>
-            <option value="diesel">Дизель</option>
-            <option value="hybrid">Гібрид</option>
-            <option value="electric">Електро</option>
-          </select>
-        </label>
-      </div>
+            <div className={styles.input__options}>
+              <label>{language === 'ua' ? 'Тип транспорту:' : 'Тип транспорта:'}</label>
 
-      <div>
-        <label>
-          Об'єм двигуна:
-          <input
-            type="number"
-            placeholder="Об'єм двигуна, см³"
-            onChange={(e) => setEngineVolume(parseInt(e.target.value, 10))}
-          />
-        </label>
-      </div>
+              <select className={styles.select__options} onChange={(e) => setVehicleType(e.target.value)}>
+                <option value="" disabled selected>
+                  {language === 'ua' ? 'Виберіть' : 'Выберите'}
+                </option>
+                <option value="car">Авто</option>
+                <option value="SUV">SUV</option>
+              </select>
+            </div>
 
-      <div>
-        <label>
-          Рік випуску авто:
-          <select onChange={(e) => setAgeCar(parseInt(e.target.value, 10))}>
-            <option value="" disabled selected>
-              Виберіть
-            </option>
-            {AgeCars.map((car) => (
-              <option key={car.id} value={car.value}>
-                {car.label}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-      <button onClick={calculateCustoms}>Calculate Customs</button>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-        <h3>Вартість вашого авто на аукціоні США: ${auctionValue}</h3>
-        <h3>Аукціонний збір: ${auctionFee}</h3>
-        <h3>Комісія USA-UA CARS: ${usaUaCarsCommission}</h3>
-        <h3>Доставка по США: ${usShippingCost}</h3>
-        <h3>Доставка в Україну: ${shippingToUkraineCost}</h3>
-        <ul style={{ marginLeft: '20px' }}>
-          <li>Доставка Морем: ${oceanShippingCost}</li>
-          <li>Експедирування: ${expeditingCost}</li>
-          <li>Доставка авто з Клайпеди до Львова: ${carCarrierCost}</li>
-        </ul>
+            <div className={styles.input__options}>
+              <label>{language === 'ua' ? 'Тип двигуна:' : 'Тип двигателя:'}</label>
 
-        <h3>Акциз: ${exciseTax}</h3>
-        <h3>ПДВ: ${vat}</h3>
-        <h3>Брокерські послуги: ${brokerage}</h3>
-        <h3>Загальна вартість мита: ${customsCost}</h3>
+              <select className={styles.select__options} onChange={(e) => setEngineType(e.target.value)}>
+                <option value="" disabled selected>
+                  Виберіть
+                </option>
+                <option value="petrol">{language === 'ua' ? 'Бензин/Газ' : 'Бензин/Газ'}</option>
+                <option value="diesel">{language === 'ua' ? 'Дизель' : 'Выберите'}Дизель</option>
+                <option value="hybrid">{language === 'ua' ? 'Гібрид' : 'Гибрид'}Гібрид</option>
+                <option value="electric">{language === 'ua' ? 'Електро' : 'Электро'}Електро</option>
+              </select>
+            </div>
 
-        <h3>Вартість авто + доставка: ${summary}</h3>
+            <div className={styles.input_block}>
+              <label>{language === 'ua' ? "Об'єм двигуна:" : 'Объем двигателя:'}</label>
+
+              <input
+                className={styles.input__field}
+                type="number"
+                placeholder={language === 'ua' ? "Об'єм двигуна, см³" : 'Объем двигателя, см³'}
+                onChange={(e) => setEngineVolume(parseInt(e.target.value, 10))}
+              />
+            </div>
+
+            <div className={styles.input__options}>
+              <label>{language === 'ua' ? 'Рік випуску авто:' : 'Год выпуска авто:'}</label>
+
+              <select className={styles.select__options} onChange={(e) => setAgeCar(parseInt(e.target.value, 10))}>
+                <option value="" disabled selected>
+                  {language === 'ua' ? 'Виберіть' : 'Выберите'}
+                </option>
+                {AgeCars.map((car) => (
+                  <option key={car.id} value={car.value}>
+                    {car.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <button onClick={calculateCustoms} className={styles.btn_calc}>
+              <span>{language === 'ua' ? 'Розрахувати' : 'Рассчитать'}</span>
+            </button>
+          </div>
+          <div className={styles.inner__result}>
+            <div className={styles.result__content}>
+              <div className={styles.result__inner__block}>
+                <h3>
+                  {language === 'ua'
+                    ? 'Вартість вашого авто на аукціоні США:'
+                    : 'Стоимость вашего авто на аукционе США:'}
+                </h3>
+                <span>${auctionValue}</span>
+              </div>
+              <div className={styles.result__inner__block}>
+                <h3>{language === 'ua' ? 'Аукціонний збір:' : 'Аукционный сбор:'}</h3> <span>${auctionFee}</span>
+              </div>
+              <div className={styles.result__inner__block}>
+                <h3>{language === 'ua' ? 'Комісія USA-UA CARS:' : 'Комиссия USA-UA CARS:'}</h3>
+                <span>${usaUaCarsCommission}</span>
+              </div>
+              <div className={styles.result__inner__block}>
+                <h3>{language === 'ua' ? 'Доставка по США:' : 'Доставка по США:'}</h3>
+                <span>${usShippingCost}</span>
+              </div>
+              <div className={styles.result__inner__block__subPrice}>
+                <div className={styles.result__inner__block}>
+                  <h3>{language === 'ua' ? 'Доставка в Україну:' : 'Доставка в Украину:'}</h3>
+                  <span>${shippingToUkraineCost}</span>
+                </div>
+                <ul className={styles.result__list}>
+                  <li className={styles.result__inner__block}>
+                    <h5>{language === 'ua' ? 'Доставка Морем:' : 'Доставка Морем:'}</h5>{' '}
+                    <span>${oceanShippingCost}</span>
+                  </li>
+                  <li className={styles.result__inner__block}>
+                    <h5>{language === 'ua' ? 'Експедирування:' : 'Экспедирование:'}</h5> <span>${expeditingCost}</span>
+                  </li>
+                  <li className={styles.result__inner__block}>
+                    <h5>
+                      {language === 'ua'
+                        ? 'Доставка авто з Клайпеди до Львова:'
+                        : 'Доставка авто из Клайпеды до Львова:'}
+                    </h5>
+                    <span>${carCarrierCost}</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className={styles.result__inner__block__subPrice}>
+                <div className={styles.result__inner__block}>
+                  <h3>{language === 'ua' ? 'Розмитнення:' : 'Растаможка:'}</h3> <span>${customsCost}</span>
+                </div>
+                <ul className={styles.result__list}>
+                  <li className={styles.result__inner__block}>
+                    <h5>{language === 'ua' ? 'Акциз:' : 'Акциз:'}</h5> <span>${exciseTax}</span>
+                  </li>
+                  <li className={styles.result__inner__block}>
+                    <h5>{language === 'ua' ? 'ПДВ:' : 'НДС:'}</h5> <span>${vat}</span>
+                  </li>
+                  <li className={styles.result__inner__block}>
+                    <h5>{language === 'ua' ? 'Брокерські послуги:' : 'Брокерские услуги:'}</h5>{' '}
+                    <span>${brokerage}</span>
+                  </li>
+                </ul>
+
+                <hr className={styles.divider} />
+                <div className={styles.result__inner__block__last}>
+                  <h3>{language === 'ua' ? 'Вартість авто + доставка:' : 'Стоимость авто + доставка:'}</h3>
+                  <span>${summary}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   )

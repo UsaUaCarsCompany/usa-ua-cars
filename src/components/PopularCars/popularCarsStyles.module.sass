@@ -93,6 +93,7 @@
   flex-direction: row
   align-items: center
   justify-content: space-between
+  gap: 15px
   color: #000
   & span
     color: rgb(8, 140, 23)
@@ -164,5 +165,9 @@
   .popCars__list
     flex-direction: column
 
-  .list__cars__cards
-    max-width: 100%
+@media (max-width: 768px)
+  .cars__content
+    height: auto
+
+  .content__header
+    flex-wrap: wrap

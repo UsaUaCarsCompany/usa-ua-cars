@@ -1,0 +1,243 @@
+.calc__block
+  padding: 60px 0
+
+.calc__header
+  margin-bottom: 40px
+  & h1
+    max-width: 695px
+    line-height: 1.3
+
+.calc__subtitle__pic
+  margin-top: 12px
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  color: #A4A4A4
+  font-size: 20px
+  line-height: 1.5
+  & span
+    max-width: 512px
+
+.subtitle__pic
+  position: relative
+  width: 288px
+  min-width: 288px
+
+.subtitle__pic img
+  position: absolute
+  top: 50%
+  transform: translate(0px, -50%)
+  transition: all 0.5s ease
+  display: block
+  min-width: 288px
+  max-width: 288px
+  width: 100%
+  height: auto
+
+.container__inner
+  display: flex
+  flex-direction: row
+  gap: 32px
+
+.inner__form
+  display: flex
+  flex-direction: column
+  gap: 20px
+  max-width: 500px
+  width: 100%
+  padding: 24px
+  background-color: rgb(55 55 55 / 90%)
+  position: relative
+  border-radius: 6px
+  z-index: 2
+
+.input__options
+  display: flex
+  flex-direction: column
+  gap: 8px
+  position: relative
+  width: 100%
+  transition: all 0.3s ease
+
+.select__options
+  transition: all 0.3s ease
+  color: #8c8c8c
+  padding: 0 15px
+  width: 100%
+  height: 100%
+  border-radius: 6px
+  font-size: 20px
+  font-weight: 400
+  border: solid 2px #efe9e9
+  min-height: 36px
+  &:hover
+    border: solid 2px #202124
+    color: #202124
+  &:focus
+    color: #202124
+    outline: none
+
+.input_block
+  display: flex
+  flex-direction: column
+  gap: 8px
+
+.input__field
+  transition: all 0.3s ease
+  color: #8c8c8c
+  padding: 0 15px
+  width: 100%
+  height: 100%
+  border-radius: 6px
+  font-size: 20px
+  font-weight: 400
+  min-height: 36px
+  border: solid 2px #efe9e9
+  &:hover
+    border: solid 2px #202124
+    color: #202124
+  &:focus
+    border: solid 2px #202124
+    outline: none
+    color: #202124
+
+.btn_calc
+  position: relative
+  display: flex
+  justify-content: center
+  align-items: center
+  border-radius: 6px
+  background: #fbe441
+  -webkit-box-shadow: 0px 0px 14px 0px rgba(250, 219, 95, 0.75)
+  -moz-box-shadow: 0px 0px 14px 0px rgba(250, 219, 95, 0.75)
+  box-shadow: 0px 0px 14px 0px rgba(250, 219, 95, 0.75)
+  overflow: hidden
+  border: none
+  height: 55px
+  &:hover
+    box-shadow: 0px 0px 4px 0px rgba(250, 219, 95, 0.75)
+
+  &:after
+    content: " "
+    width: 0%
+    height: 100%
+    background: #202124
+    position: absolute
+    transition: all 0.4s ease-in-out
+    right: 0
+
+  &:hover::after
+    right: auto
+    left: 0
+    width: 100%
+
+  span
+    text-align: center
+    text-decoration: none
+    width: 100%
+    padding: 14px 16px
+    color: #202124
+    font-size: 16px
+    font-weight: 700
+    z-index: 5
+    transition: all 0.3s ease-in-out
+
+  &:hover span
+    color: #fff
+    animation: scaleUp 0.3s ease-in-out
+
+@keyframes scaleUp
+  0%
+    transform: scale(1)
+
+  50%
+    transform: scale(0.95)
+
+  100%
+    transform: scale(1)
+
+.inner__result
+  max-width: 100%
+  width: 100%
+
+.result__content
+  display: flex
+  flex-direction: column
+  gap: 18px
+
+.result__inner__block
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: space-between
+  & span
+    font-size: 21px
+    font-weight: 700
+  & h3
+    font-weight: 400
+  & h5
+    font-weight: 400
+    font-size: 16px
+    color: #A4A4A4
+
+.result__inner__block__subPrice
+  display: flex
+  flex-direction: column
+  gap: 14px
+
+.result__list
+  margin-left: 40px
+  display: flex
+  flex-direction: column
+  gap: 12px
+  & span
+    font-size: 16px
+    color: #A4A4A4
+
+.divider
+  width: 100%
+  margin: 10px 0
+
+.result__inner__block__last
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: space-between
+  & span
+    font-size: 21px
+    font-weight: 700
+
+@media ( max-width: 1000px )
+  .container__inner
+    flex-direction: column
+
+  .inner__form
+    max-width: 100%
+
+@media ( max-width: 728px )
+  .calc__header
+    & h1
+      font-size: 30px
+
+  .calc__subtitle__pic
+    flex-direction: column
+
+  .calc__subtitle__pic
+    & span
+      min-width: 100%
+
+  .subtitle__pic
+    display: flex
+    justify-content: flex-end
+    width: 100%
+
+  .subtitle__pic img
+    position: relative
+    top: 0
+    transform: translate(0px, 0px)
+    transition: all 0.5s ease
+    display: block
+    min-width: 288px
+    max-width: 288px
+    width: 100%
+    height: auto
