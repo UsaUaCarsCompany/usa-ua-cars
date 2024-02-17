@@ -183,10 +183,10 @@ export const CarCustomsCalculator: React.FC = () => {
 
               <select className={styles.select__options} onChange={(e) => setEngineType(e.target.value)}>
                 <option value="" disabled selected>
-                  Виберіть
+                  {language === 'ua' ? 'Виберіть' : 'Выберите'}
                 </option>
                 <option value="petrol">{language === 'ua' ? 'Бензин/Газ' : 'Бензин/Газ'}</option>
-                <option value="diesel">{language === 'ua' ? 'Дизель' : 'Выберите'}</option>
+                <option value="diesel">{language === 'ua' ? 'Дизель' : 'Дизель'}</option>
                 <option value="hybrid">{language === 'ua' ? 'Гібрид' : 'Гибрид'}</option>
                 <option value="electric">{language === 'ua' ? 'Електро' : 'Электро'}</option>
               </select>
