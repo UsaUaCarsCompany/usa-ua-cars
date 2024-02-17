@@ -186,9 +186,9 @@ export const CarCustomsCalculator: React.FC = () => {
                   Виберіть
                 </option>
                 <option value="petrol">{language === 'ua' ? 'Бензин/Газ' : 'Бензин/Газ'}</option>
-                <option value="diesel">{language === 'ua' ? 'Дизель' : 'Выберите'}Дизель</option>
-                <option value="hybrid">{language === 'ua' ? 'Гібрид' : 'Гибрид'}Гібрид</option>
-                <option value="electric">{language === 'ua' ? 'Електро' : 'Электро'}Електро</option>
+                <option value="diesel">{language === 'ua' ? 'Дизель' : 'Выберите'}</option>
+                <option value="hybrid">{language === 'ua' ? 'Гібрид' : 'Гибрид'}</option>
+                <option value="electric">{language === 'ua' ? 'Електро' : 'Электро'}</option>
               </select>
             </div>
 
