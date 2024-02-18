@@ -16,27 +16,28 @@ export const HeaderLinks: HeaderLinksProps[] = [
   },
 
   {
-    id: 2523,
-    nameUa: 'Як ми працюємо',
-    nameRu: 'Как мы работаем',
-    href: 'howWeWork',
+    id: 7658,
+    nameUa: 'Розмитнення',
+    nameRu: 'Растаможка',
+    href: 'Clearance',
     index: 0.6,
+  },
+
+  {
+    id: 2523,
+    nameUa: 'Етапи покупки',
+    nameRu: 'Этапы покупки',
+    href: 'howWeWork',
+    index: 0.7,
   },
   {
     id: 76481,
     nameUa: 'Популярне',
     nameRu: 'Популярное',
     href: 'Popular',
-    index: 0.7,
-  },
-
-  {
-    id: 7658,
-    nameUa: 'Розмитнення',
-    nameRu: 'Растаможка',
-    href: 'Clearance',
     index: 0.8,
   },
+
   {
     id: 989,
     nameUa: 'FAQ',

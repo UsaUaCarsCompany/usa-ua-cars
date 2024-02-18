@@ -7,6 +7,12 @@ import { motion } from 'framer-motion'
 import { bottomAnimations, leftAnimations } from '@/animations/page'
 import { useLanguage } from '@/ContextLanguage/LanguageContext'
 
+interface AuctionFeeRange {
+  min: number
+  max: number
+  fee: number
+}
+
 export const CarCustomsCalculator: React.FC = () => {
   const [auctionValue, setAuctionValue] = useState<number>(0)
   const [selectedAuction, setSelectedAuction] = useState<string>('Аукціон')
@@ -38,13 +44,87 @@ export const CarCustomsCalculator: React.FC = () => {
   const calculateCustoms = () => {
     const auctionPriceCar = auctionValue
 
-    const auctionFeeRanges: Record<string, number> = {
-      copart: auctionValue * 0.0379,
-      iaai: auctionValue * 0.062,
+    const auctionFeeRanges: Record<string, AuctionFeeRange[]> = {
+      copart: [
+        { min: 0.01, max: 49.99, fee: 25.0 },
+        { min: 50.0, max: 99.99, fee: 45.0 },
+        { min: 100.0, max: 199.99, fee: 80.0 },
+        { min: 200.0, max: 399.99, fee: 135.0 },
+        { min: 400.0, max: 499.99, fee: 180.0 },
+        { min: 500.0, max: 599.99, fee: 205.0 },
+        { min: 600.0, max: 699.99, fee: 235.0 },
+        { min: 700.0, max: 799.99, fee: 260.0 },
+        { min: 800.0, max: 899.99, fee: 280.0 },
+        { min: 900.0, max: 999.99, fee: 305.0 },
+        { min: 1000.0, max: 1199.99, fee: 355.0 },
+        { min: 1200.0, max: 1299.99, fee: 380.0 },
+        { min: 1300.0, max: 1399.99, fee: 400.0 },
+        { min: 1400.0, max: 1499.99, fee: 410.0 },
+        { min: 1500.0, max: 1599.99, fee: 420.0 },
+        { min: 1600.0, max: 1699.99, fee: 440.0 },
+        { min: 1700.0, max: 1799.99, fee: 450.0 },
+        { min: 1800.0, max: 1999.99, fee: 465.0 },
+        { min: 2000.0, max: 2399.99, fee: 500.0 },
+        { min: 2400.0, max: 2499.99, fee: 525.0 },
+        { min: 2500.0, max: 2999.99, fee: 550.0 },
+        { min: 3000.0, max: 3499.99, fee: 650.0 },
+        { min: 3500.0, max: 3999.99, fee: 700.0 },
+        { min: 4000.0, max: 4499.99, fee: 725.0 },
+        { min: 4500.0, max: 4999.99, fee: 750.0 },
+        { min: 5000.0, max: 5999.99, fee: 775.0 },
+        { min: 6000.0, max: 7499.99, fee: 825.0 },
+        { min: 7500.0, max: 9999.99, fee: 850.0 },
+        { min: 10000.0, max: 14999.99, fee: 900.0 },
+        { min: 15000.0, max: Infinity, fee: 0.075 },
+      ],
+      iaai: [
+        { min: 0.01, max: 49.99, fee: 25.0 },
+        { min: 50.0, max: 99.99, fee: 45.0 },
+        { min: 100.0, max: 199.99, fee: 80.0 },
+        { min: 200.0, max: 399.99, fee: 120.0 },
+        { min: 400.0, max: 499.99, fee: 170.0 },
+        { min: 500.0, max: 599.99, fee: 195.0 },
+        { min: 600.0, max: 699.99, fee: 225.0 },
+        { min: 700.0, max: 799.99, fee: 245.0 },
+        { min: 800.0, max: 899.99, fee: 260.0 },
+        { min: 900.0, max: 999.99, fee: 280.0 },
+        { min: 1000.0, max: 1199.99, fee: 305.0 },
+        { min: 1200.0, max: 1299.99, fee: 330.0 },
+        { min: 1300.0, max: 1399.99, fee: 350.0 },
+        { min: 1400.0, max: 1499.99, fee: 360.0 },
+        { min: 1500.0, max: 1599.99, fee: 370.0 },
+        { min: 1600.0, max: 1699.99, fee: 390.0 },
+        { min: 1700.0, max: 1799.99, fee: 400.0 },
+        { min: 1800.0, max: 1999.99, fee: 415.0 },
+        { min: 2000.0, max: 2399.99, fee: 450.0 },
+        { min: 2400.0, max: 2499.99, fee: 475.0 },
+        { min: 2500.0, max: 2999.99, fee: 500.0 },
+        { min: 3000.0, max: 3499.99, fee: 600.0 },
+        { min: 3500.0, max: 3999.99, fee: 650.0 },
+        { min: 4000.0, max: 4499.99, fee: 675.0 },
+        { min: 4500.0, max: 4999.99, fee: 700.0 },
+        { min: 5000.0, max: 5999.99, fee: vehicleType === 'SUV' ? 0.1 : 725.0 },
+        { min: 6000.0, max: 6999.99, fee: vehicleType === 'SUV' ? 0.1 : 750.0 },
+        { min: 7000.0, max: 7999.99, fee: vehicleType === 'SUV' ? 0.1 : 775.0 },
+        { min: 8000.0, max: 9999.99, fee: vehicleType === 'SUV' ? 0.1 : 800.0 },
+        { min: 10000.0, max: 14999.99, fee: vehicleType === 'SUV' ? 0.1 : 850.0 },
+        { min: 15000.0, max: Infinity, fee: vehicleType === 'SUV' ? 0.1 : 0.075 },
+      ],
     }
-    const auctionFeeRange = auctionFeeRanges[selectedAuction]
 
-    const auctionFeeResult = auctionFeeRange
+    const auctionFeeRange = auctionFeeRanges[selectedAuction]
+    let auctionFeeResult = 0
+
+    if (auctionFeeRange) {
+      for (const rangeData of auctionFeeRange) {
+        const { min, max, fee } = rangeData
+
+        if (auctionPriceCar >= min && auctionPriceCar <= max) {
+          auctionFeeResult = fee < 1 ? auctionPriceCar * fee : fee
+          break
+        }
+      }
+    }
 
     // Комісія USA-UA CARS
     const usaUaCarsCommissionResult = 400
@@ -173,7 +253,7 @@ export const CarCustomsCalculator: React.FC = () => {
                 <option value="" disabled selected>
                   {language === 'ua' ? 'Виберіть' : 'Выберите'}
                 </option>
-                <option value="car">Авто</option>
+                <option value="car">{language === 'ua' ? 'Легкове' : 'Легковой'}</option>
                 <option value="SUV">SUV</option>
               </select>
             </div>
@@ -185,7 +265,7 @@ export const CarCustomsCalculator: React.FC = () => {
                 <option value="" disabled selected>
                   {language === 'ua' ? 'Виберіть' : 'Выберите'}
                 </option>
-                <option value="petrol">{language === 'ua' ? 'Бензин/Газ' : 'Бензин/Газ'}</option>
+                <option value="petrol">{language === 'ua' ? 'Бензин' : 'Бензин'}</option>
                 <option value="diesel">{language === 'ua' ? 'Дизель' : 'Дизель'}</option>
                 <option value="hybrid">{language === 'ua' ? 'Гібрид' : 'Гибрид'}</option>
                 <option value="electric">{language === 'ua' ? 'Електро' : 'Электро'}</option>

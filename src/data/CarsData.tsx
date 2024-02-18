@@ -78,8 +78,8 @@ export const CarsData: CarsDataProps[] = [
     id: 5566,
     title: 'TESLA MODEL X',
     price: {
-      ua: 'від 34 200 $',
-      ru: 'от 34 200 $',
+      ua: 'від 29 000 $',
+      ru: 'от 29 000 $',
     },
     image: 'car13',
   },
@@ -87,8 +87,8 @@ export const CarsData: CarsDataProps[] = [
     id: 7788,
     title: 'VOLKSWAGEN TIGUAN',
     price: {
-      ua: 'від 22 000 $',
-      ru: 'от 22 000 $',
+      ua: 'від 14 000 $',
+      ru: 'от 14 000 $',
     },
     image: 'car14',
   },

@@ -8,10 +8,10 @@ const Home = () => {
   return (
     <main className="content">
       <Intro />
-      <HowWeWork />
-      <PopularCars />
-      <InterestIn />
       <CarCustomsCalculator />
+      <HowWeWork />
+      <InterestIn />
+      <PopularCars />
       <Questions />
     </main>
   )
