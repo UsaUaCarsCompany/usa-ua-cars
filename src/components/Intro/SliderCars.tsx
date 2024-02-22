@@ -41,7 +41,7 @@ export const CarsSlider = () => {
                 </div>
 
                 <motion.div variants={leftAnimations} custom={1} className={styles.slider_car_image}>
-                  <Image src={`/cars/${car.image}.png`} width={590} height={323} alt={car.title} />
+                  <Image src={`/cars/${car.image}.png`} width={590} height={323} alt={car.title.toLowerCase()} />
                 </motion.div>
               </div>
             </motion.div>

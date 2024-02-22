@@ -23,7 +23,7 @@ export const PopularCarsSlideItem = ({
     <>
       <li className={styles.list__cars__cards}>
         <div className={styles.cars__header__block}>
-          <Image src={`/cars/${car.image}.png`} width={500} height={270} alt={car.title} />
+          <Image src={`/cars/${car.image}.png`} width={500} height={270} alt={car.title.toLowerCase()} />
         </div>
         <div className={styles.cars__content}>
           <div className={styles.content__header}>
