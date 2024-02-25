@@ -20,6 +20,7 @@ export const CarCustomsCalculator: React.FC = () => {
   const [engineVolume, setEngineVolume] = useState<number>(0)
   const [engineType, setEngineType] = useState<string>('')
   const [vehicleType, setVehicleType] = useState<string>('')
+  const [importDuty, setImportDuty] = useState<number>(0)
   const [customsCost, setCustomsCost] = useState<number>(0)
   const [exciseTax, setExciseTax] = useState<number>(0)
   const [vat, setVat] = useState<number>(0)
@@ -130,7 +131,7 @@ export const CarCustomsCalculator: React.FC = () => {
     }
 
     // Комісія USA-UA CARS
-    const usaUaCarsCommissionResult = 400
+    const usaUaCarsCommissionResult = 450
 
     // Доставка по США
     const usaShippingCostResult = 650
@@ -145,34 +146,60 @@ export const CarCustomsCalculator: React.FC = () => {
     }
 
     // Експедирування
-    const expeditingCostResult = 230
+    const expeditingCostResult = 250
 
     // Доставка авто з Клайпеди до Львова
-    const carCarrierCostResult = 920
+    const carCarrierCostResult = 1100
 
-    // Доставка в Україну
-    const shippingToUkraineCostResult = oceanShippingCostResult + expeditingCostResult + carCarrierCostResult
-
-    const currentDate = new Date()
-    const currentYear = currentDate.getFullYear()
-    const age = currentYear - ageCar
-    const ageCoefficients = [2.2, 1.9, 1.65, 1.55, 1.45, 1.35, 1, 0.9, 0.85, 0.8, 0.75, 0.7, 0.7]
-    const ageCoefficient = age < ageCoefficients.length ? ageCoefficients[age] : 0.7
-
-    const engineTypeCoefficients: Record<string, number> = { petrol: 1, diesel: 1.2, hybrid: 0.5, electric: 0 }
-    const engineTypeCoefficient = engineTypeCoefficients[engineType]
-
-    const exclusivityCoefficient = 1
-
-    const totalCoefficient = ageCoefficient * engineVolume * engineTypeCoefficient * exclusivityCoefficient
-
-    const exciseTaxResult = totalCoefficient / 2
-    const vatRate = 0.2
-    const vatResult = totalCoefficient * 3.5 * vatRate
-
+    // Брокерські послуги
     const brokerage = 150
 
-    const customsCostResult = exciseTaxResult + vatResult + brokerage
+    // Доставка в Україну
+    const shippingToUkraineCostResult =
+      oceanShippingCostResult + expeditingCostResult + carCarrierCostResult + brokerage
+
+    // Отримання поточної дати
+    const currentDate = new Date()
+
+    // Отримання поточного року
+    const currentYear = currentDate.getFullYear()
+
+    // Визначення віку авто
+    const age = currentYear - ageCar
+
+    // Коефіцієнти віку для розрахунку акцизного податку
+    const ageCoefficients = [2.2, 1.9, 1.65, 1.55, 1.45, 1.35, 1, 0.9, 0.85, 0.8, 0.75, 0.7, 0.7]
+
+    // Визначення коефіцієнта віку
+    const ageCoefficient = age < ageCoefficients.length ? ageCoefficients[age] : 0.7
+
+    // Коефіцієнти типу двигуна
+    const engineTypeCoefficients: Record<string, number> = { petrol: 1, diesel: 1.2, hybrid: 0.5, electric: 0 }
+
+    // Визначення коефіцієнта типу двигуна
+    const engineTypeCoefficient = engineTypeCoefficients[engineType]
+
+    // Коефіцієнт ексклюзивності
+    const exclusivityCoefficient = 1
+
+    // Сума від якої рахується розмитнення
+    const ImportDutyPriceCar = auctionValue + auctionFeeResult + usaShippingCostResult + oceanShippingCostResult
+
+    // Ввізне мито (10% від ImportDutyPriceCar)
+    const importDutyResult = ImportDutyPriceCar * 0.1
+
+    const totalCoefficient = ageCoefficient * engineVolume * engineTypeCoefficient * exclusivityCoefficient
+    // акцизний податок
+    const exciseTaxResult = totalCoefficient / 2
+
+    // Ставка ПДВ
+    const vatRate = 0.2
+
+    // Розрахунок суми ПДВ
+    const vatResult = ImportDutyPriceCar * vatRate
+
+    // Розрахунок загальної вартості митного оформлення
+    const customsCostResult = exciseTaxResult + vatResult + importDutyResult
 
     const totalCost =
       auctionPriceCar +
@@ -182,6 +209,7 @@ export const CarCustomsCalculator: React.FC = () => {
       shippingToUkraineCostResult +
       customsCostResult
 
+    setImportDuty(Math.round(importDutyResult))
     setAuctionValue(auctionPriceCar)
     setExciseTax(Math.round(exciseTaxResult))
     setVat(Math.round(vatResult))
@@ -213,7 +241,7 @@ export const CarCustomsCalculator: React.FC = () => {
                 : 'С помощью нашего онлайн-калькулятора вы можете рассчитать стоимость авто из Америки'}
             </motion.span>
             <motion.div variants={leftAnimations} custom={2} className={styles.subtitle__pic}>
-              <Image src="/calc/calcCar.png" width={288} height={147} alt="Ferrari" />
+              <Image src="/calc/calcCar.png" width={288} height={147} alt="Mustang" />
             </motion.div>
           </div>
         </motion.div>
@@ -312,7 +340,7 @@ export const CarCustomsCalculator: React.FC = () => {
                     ? 'Вартість вашого авто на аукціоні США:'
                     : 'Стоимость вашего авто на аукционе США:'}
                 </h3>
-                <span>${auctionValue}</span>
+                <span>${isNaN(auctionValue) ? 0 : auctionValue}</span>
               </div>
               <div className={styles.result__inner__block}>
                 <h3>{language === 'ua' ? 'Аукціонний збір:' : 'Аукционный сбор:'}</h3> <span>${auctionFee}</span>
@@ -346,6 +374,10 @@ export const CarCustomsCalculator: React.FC = () => {
                     </h5>
                     <span>${carCarrierCost}</span>
                   </li>
+                  <li className={styles.result__inner__block}>
+                    <h5>{language === 'ua' ? 'Брокерські послуги:' : 'Брокерские услуги:'}</h5>{' '}
+                    <span>${brokerage}</span>
+                  </li>
                 </ul>
               </div>
 
@@ -355,14 +387,14 @@ export const CarCustomsCalculator: React.FC = () => {
                 </div>
                 <ul className={styles.result__list}>
                   <li className={styles.result__inner__block}>
+                    <h5>{language === 'ua' ? 'Ввізне мито:' : 'Ввозная пошлина:'}</h5>
+                    <span>${importDuty}</span>
+                  </li>
+                  <li className={styles.result__inner__block}>
                     <h5>{language === 'ua' ? 'Акциз:' : 'Акциз:'}</h5> <span>${exciseTax}</span>
                   </li>
                   <li className={styles.result__inner__block}>
                     <h5>{language === 'ua' ? 'ПДВ:' : 'НДС:'}</h5> <span>${vat}</span>
-                  </li>
-                  <li className={styles.result__inner__block}>
-                    <h5>{language === 'ua' ? 'Брокерські послуги:' : 'Брокерские услуги:'}</h5>{' '}
-                    <span>${brokerage}</span>
                   </li>
                 </ul>
 

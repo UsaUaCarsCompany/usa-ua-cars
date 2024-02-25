@@ -122,7 +122,7 @@ const Intro = () => {
                   </div>
                   <div className={styles.input__options}>
                     <select onChange={chooseBrand} className={styles.select__options} name="brand" id="id_brand">
-                      <option value="" selected={true}>
+                      <option value="" selected={true} disabled>
                         Марка
                       </option>
                       {OptionsList.map(({ ...brand }: OptionsListData) => (
@@ -139,7 +139,7 @@ const Intro = () => {
                       name="meta_model"
                       id="id_meta_model"
                     >
-                      <option value="" selected={!selectedModel}>
+                      <option value="" selected={!selectedModel} disabled>
                         Модель
                       </option>
                       {filteredModels.map((modelName, index) => (
@@ -158,7 +158,7 @@ const Intro = () => {
                         name="meta_year_from"
                         id="id_year_from"
                       >
-                        <option value="2000" selected={!selectedYearFrom}>
+                        <option value="2000" selected={!selectedYearFrom} disabled>
                           {language === 'ua' ? 'Рік випуску від' : 'Год выпуска от'}
                         </option>
                         {YearFrom.map(({ ...year }: YearFromProps) => (
@@ -175,7 +175,7 @@ const Intro = () => {
                         name="meta_year_to"
                         id="id_year_to"
                       >
-                        <option value="2018" selected={!selectedYearFrom}>
+                        <option value="2018" selected={!selectedYearFrom} disabled>
                           {language === 'ua' ? 'Рік випуску до' : 'Год выпуска до'}
                         </option>
                         {YearTo.map(({ ...year }: YearToProps) => (
