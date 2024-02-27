@@ -99,7 +99,7 @@ export const InterestIn = () => {
                     className={styles.select__options}
                     id="type_of_goat"
                   >
-                    <option value="" selected={true}>
+                    <option value="" selected={true} disabled>
                       {language === 'ua' ? 'Тип Кузова' : 'Тип Кузова'}
                     </option>
                     {Goat.map(({ ...goat }: GoatProps) => (
@@ -118,7 +118,7 @@ export const InterestIn = () => {
                     className={styles.select__options}
                     id="turnkey_budget"
                   >
-                    <option value="" selected={true}>
+                    <option value="" selected={true} disabled>
                       {language === 'ua' ? 'Бюджет під ключ' : 'Бюджет под ключ'}
                     </option>
                     {Key.map(({ ...key }: KeyProps) => (

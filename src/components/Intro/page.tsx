@@ -158,7 +158,7 @@ const Intro = () => {
                         name="meta_year_from"
                         id="id_year_from"
                       >
-                        <option value="2000" selected={!selectedYearFrom} disabled>
+                        <option value="2000" selected={!selectedYearFrom}>
                           {language === 'ua' ? 'Рік випуску від' : 'Год выпуска от'}
                         </option>
                         {YearFrom.map(({ ...year }: YearFromProps) => (
@@ -175,7 +175,7 @@ const Intro = () => {
                         name="meta_year_to"
                         id="id_year_to"
                       >
-                        <option value="2018" selected={!selectedYearFrom} disabled>
+                        <option value="2018" selected={!selectedYearFrom}>
                           {language === 'ua' ? 'Рік випуску до' : 'Год выпуска до'}
                         </option>
                         {YearTo.map(({ ...year }: YearToProps) => (

@@ -5,6 +5,7 @@ export type AgeCarsProps = {
 }
 
 export const AgeCars: AgeCarsProps[] = [
+  { id: 25, value: '2024', label: '2024' },
   { id: 1, value: '2023', label: '2023' },
   { id: 2, value: '2022', label: '2022' },
   { id: 3, value: '2021', label: '2021' },
