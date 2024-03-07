@@ -200,7 +200,7 @@ export const CarCustomsCalculator: React.FC = () => {
     const ageCoefficient = age < ageCoefficients.length ? ageCoefficients[age] : 0.7
 
     // Коефіцієнти типу двигуна
-    const engineTypeCoefficients: Record<string, number> = { petrol: 1, diesel: 1.5, hybrid: 1, electric: 1 }
+    const engineTypeCoefficients: Record<string, number> = { petrol: 1.001, diesel: 1, hybrid: 1, electric: 1 }
 
     // Визначення коефіцієнта типу двигуна
     const engineTypeCoefficient = engineTypeCoefficients[engineType]
