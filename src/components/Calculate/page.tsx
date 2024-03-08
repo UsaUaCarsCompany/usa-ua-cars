@@ -194,13 +194,15 @@ export const CarCustomsCalculator: React.FC = () => {
     const age = currentYear - ageCar
 
     // Коефіцієнти віку для розрахунку акцизного податку
-    const ageCoefficients = [2.2, 1.9, 1.65, 1.55, 1.45, 1.35, 1, 0.9, 0.85, 0.8, 0.75, 0.7, 0.7]
+    const ageCoefficients = [
+      0.2, 0.2, 0.2, 0.4, 0.596, 0.796, 0.994, 1.192, 1.391, 1.59, 1.79, 1.988, 2.187, 2.386, 2.585,
+    ]
 
     // Визначення коефіцієнта віку
-    const ageCoefficient = age < ageCoefficients.length ? ageCoefficients[age] : 0.7
+    const ageCoefficient = age < ageCoefficients.length ? ageCoefficients[age] : 2.783
 
     // Коефіцієнти типу двигуна
-    const engineTypeCoefficients: Record<string, number> = { petrol: 1.001, diesel: 1, hybrid: 1, electric: 1 }
+    const engineTypeCoefficients: Record<string, number> = { petrol: 1.001, diesel: 1.5, hybrid: 1, electric: 1 }
 
     // Визначення коефіцієнта типу двигуна
     const engineTypeCoefficient = engineTypeCoefficients[engineType]
@@ -216,11 +218,40 @@ export const CarCustomsCalculator: React.FC = () => {
     const importDutyResult = engineType === 'electric' ? 0 : ImportDutyPriceCar * 0.1 * CoefficientsCurrencyUSD
 
     const totalCoefficient = ageCoefficient * engineVolume * engineTypeCoefficient * exclusivityCoefficient
-    // акцизний податок
-    const exciseTaxResult =
+
+    const exciseTaxResultPetrol =
+      engineType === 'petrol' && engineVolume > 3000
+        ? (totalCoefficient / 2) * CoefficientsCurrencyUSD
+        : (totalCoefficient / 4) * CoefficientsCurrencyUSD
+
+    const exciseTaxResultHybrid =
+      engineType === 'hybrid' && engineVolume > 3000
+        ? (totalCoefficient / 2) * CoefficientsCurrencyUSD
+        : (totalCoefficient / 4) * CoefficientsCurrencyUSD
+
+    const exciseTaxResultDisel =
+      engineType === 'diesel' && engineVolume > 3500
+        ? (totalCoefficient / 2) * CoefficientsCurrencyUSD
+        : (totalCoefficient / 4) * CoefficientsCurrencyUSD
+
+    const exciseTaxResultElectric =
       engineType === 'electric'
         ? totalCoefficient * CoefficientsCurrencyUSD
         : (totalCoefficient / 4) * CoefficientsCurrencyUSD
+
+    // акцизний податок
+    const exciseTaxResult =
+      engineType === 'petrol'
+        ? exciseTaxResultPetrol
+        : engineType === 'hybrid'
+        ? exciseTaxResultHybrid
+        : engineType === 'diesel'
+        ? exciseTaxResultDisel
+        : engineType === 'electric'
+        ? exciseTaxResultElectric
+        : (totalCoefficient / 4) * CoefficientsCurrencyUSD
+
+    //!! ЗРОБИТИ РОЗРАХУНОК РОКІВ ЯК НА САЙТІ І ТАКОЖ ВИРАХУВАТИ ДІЛЕННЯ (totalCoefficient / 4) ПО ОБ'ЄМУ ДВИГУНА
 
     // Ставка ПДВ
     const vatRate = 0.2
