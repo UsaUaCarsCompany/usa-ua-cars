@@ -199,7 +199,8 @@ export const CarCustomsCalculator: React.FC = () => {
     ]
 
     // Визначення коефіцієнта віку
-    const ageCoefficient = age < ageCoefficients.length ? ageCoefficients[age] : 2.783
+    const ageCoefficient =
+      engineType === 'electric' ? 0.994 : age < ageCoefficients.length ? ageCoefficients[age] : 2.783
 
     // Коефіцієнти типу двигуна
     const engineTypeCoefficients: Record<string, number> = { petrol: 1.001, diesel: 1.5, hybrid: 1, electric: 1 }
@@ -250,8 +251,6 @@ export const CarCustomsCalculator: React.FC = () => {
         : engineType === 'electric'
         ? exciseTaxResultElectric
         : (totalCoefficient / 4) * CoefficientsCurrencyUSD
-
-    //!! ЗРОБИТИ РОЗРАХУНОК РОКІВ ЯК НА САЙТІ І ТАКОЖ ВИРАХУВАТИ ДІЛЕННЯ (totalCoefficient / 4) ПО ОБ'ЄМУ ДВИГУНА
 
     // Ставка ПДВ
     const vatRate = 0.2
