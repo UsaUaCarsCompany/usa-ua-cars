@@ -50,8 +50,8 @@ export async function POST(req: NextRequest) {
 
     // Define the email options
     const mailOptions = {
-      from: 'linetsky.yura@gmail.com',
-      to: 'linetsky.yura@gmail.com',
+      from: 'usauacars.company@gmail.com',
+      to: 'usauacars.company@gmail.com',
       subject: `Клієнт на ім'я ${name} хоче зв'язатися з вами`,
       html: `
       <div style="background-color: #fbe441; color: #000; padding: 20px; border-radius: 12px;">
