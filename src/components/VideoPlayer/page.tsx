@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import { Navigation } from 'swiper/modules'
-import { CarsDataProps, CarsData } from '@/data/CarsData'
+import { VideosReviewsDataProps, VideosReviewsData } from '@/data/VideosReviewsData'
 import { useLanguage } from '@/ContextLanguage/LanguageContext'
 import { motion } from 'framer-motion'
 import { leftAnimations, rightAnimations } from '@/animations/page'
@@ -30,7 +30,7 @@ export const VideoPlayer = () => {
         <div className="container">
           <div className={styles.inner__title}>
             <motion.h3 variants={rightAnimations} custom={2}>
-              {language === 'ua' ? 'Відгуки наших клієнтів' : 'Отзывы наших клиентов'} ({CarsData.length})
+              {language === 'ua' ? 'Відгуки наших клієнтів' : 'Отзывы наших клиентов'} ({VideosReviewsData.length})
             </motion.h3>
             <motion.span variants={rightAnimations} custom={2.2} />
           </div>
@@ -47,8 +47,8 @@ export const VideoPlayer = () => {
             spaceBetween={20}
             className="VideoPlayer"
           >
-            {CarsData.map(({ ...car }: CarsDataProps) => (
-              <SwiperSlide key={car.id}>
+            {VideosReviewsData.map(({ ...review }: VideosReviewsDataProps) => (
+              <SwiperSlide key={review.id}>
                 <div className={styles.player__block_card}>
                   <div className={styles.video__player}>
                     <DynamicReactPlayer
@@ -56,12 +56,14 @@ export const VideoPlayer = () => {
                       light={true}
                       width="100%"
                       height="300px"
-                      url="https://www.youtube.com/watch?v=hrJnY-LQN2w"
+                      url={review.urlVideo}
                     />
                   </div>
                   <div className={styles.player__content}>
-                    <h5 className={styles.content__title}>MAZDA CX-3 GRAND TOURING 2016</h5>
-                    <p className={styles.content__subtitle}>Придбали в США за 2 950 $ клієнтів з Харкова</p>
+                    <h5 className={styles.content__title}>{review.title}</h5>
+                    <p className={styles.content__subtitle}>
+                      {language === 'ua' ? review.subtitle.subtitle_ua : review.subtitle.subtitle_ru}
+                    </p>
                   </div>
                 </div>
               </SwiperSlide>
