@@ -1,5 +1,3 @@
-// HOME PAGE
-
 import CarCustomsCalculator from '@/components/Calculate/page'
 import HowWeWork from '@/components/HowWeWork/page'
 import InterestIn from '@/components/InterestIn/page'
@@ -11,47 +9,12 @@ import { client } from '../../sanity/lib/client'
 import { CarsDataProps } from '@/data/CarsData'
 import { VideosReviewsDataProps } from '@/data/VideosReviewsData'
 
-export async function getCars() {
-  const query = `
-  *[_type == "cars"] | order(createdAt desc) {
-    id,
-    title,
-    "image": {
-      "alt": image.alt,
-      "_ref": image.asset._ref
-    },
-    price
-  }
-  `
-  const data = await client.fetch(query)
-
-  return data
+interface PropsHomeGetsData {
+  CarsDataCMS: CarsDataProps[]
+  VideosDataCMS: VideosReviewsDataProps[]
 }
 
-export async function getVideos() {
-  const query = `
-  *[_type == "videoReview"] | order(createdAt desc) {
-    id,
-    title,
-    subtitle,
-    "preview": {
-      "alt": preview.alt,
-      "_ref": preview.asset._ref
-    },
-    urlVideo
-  }
-  `
-  const data = await client.fetch(query)
-
-  return data
-}
-
-export const revalidate = 60
-
-const Home = async () => {
-  const CarsDataCMS: CarsDataProps[] = await getCars()
-  const VideosDataCMS: VideosReviewsDataProps[] = await getVideos()
-
+const Home = ({ CarsDataCMS, VideosDataCMS }: PropsHomeGetsData) => {
   return (
     <main className="content">
       <Intro CarsDataCMS={CarsDataCMS} />
@@ -63,6 +26,48 @@ const Home = async () => {
       <Questions />
     </main>
   )
+}
+
+Home.getInitialProps = async () => {
+  const getCars = async () => {
+    const query = `
+    *[_type == "cars"] | order(createdAt desc) {
+      id,
+      title,
+      "image": {
+        "alt": image.alt,
+        "_ref": image.asset._ref
+      },
+      price
+    }
+    `
+    const data = await client.fetch(query)
+
+    return data
+  }
+
+  const getVideos = async () => {
+    const query = `
+    *[_type == "videoReview"] | order(createdAt desc) {
+      id,
+      title,
+      subtitle,
+      "preview": {
+        "alt": preview.alt,
+        "_ref": preview.asset._ref
+      },
+      urlVideo
+    }
+    `
+    const data = await client.fetch(query)
+
+    return data
+  }
+
+  const CarsDataCMS: CarsDataProps[] = await getCars()
+  const VideosDataCMS: VideosReviewsDataProps[] = await getVideos()
+
+  return { CarsDataCMS, VideosDataCMS }
 }
 
 export default Home
