@@ -11,6 +11,8 @@ import { CarsDataProps } from '@/data/CarsData'
 import { VideosReviewsDataProps } from '@/data/VideosReviewsData'
 import { getCars, getVideos } from '@/utils/DataFetching'
 
+export const revalidate = 60
+
 const Home = async () => {
   const CarsDataCMS: CarsDataProps[] = await getCars()
   const VideosDataCMS: VideosReviewsDataProps[] = await getVideos()

@@ -34,5 +34,3 @@ export async function getVideos() {
 
   return data
 }
-
-export const revalidate = 60
