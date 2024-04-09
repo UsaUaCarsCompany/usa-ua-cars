@@ -1,3 +1,5 @@
+// HOME PAGE
+
 import CarCustomsCalculator from '@/components/Calculate/page'
 import HowWeWork from '@/components/HowWeWork/page'
 import InterestIn from '@/components/InterestIn/page'
