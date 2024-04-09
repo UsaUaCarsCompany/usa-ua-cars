@@ -9,8 +9,13 @@ import { YearTo, YearToProps } from '@/selectData/YearTo'
 import { useLanguage } from '@/ContextLanguage/LanguageContext'
 import { motion } from 'framer-motion'
 import { leftAnimations, rightAnimations } from '@/animations/page'
+import { CarsDataProps } from '@/data/CarsData'
 
-const Intro = () => {
+interface PropsOfDataCars {
+  CarsDataCMS: CarsDataProps[]
+}
+
+const Intro = ({ CarsDataCMS }: PropsOfDataCars) => {
   const [selectedWebsite, setSelectedWebsite] = useState('copart')
   const [selectedBrand, setSelectedBrand] = useState('')
   const [selectedModel, setSelectedModel] = useState('')
@@ -192,7 +197,7 @@ const Intro = () => {
                 </form>
               </motion.div>
               <motion.div variants={leftAnimations} custom={0.2} className={styles.slider__cars}>
-                <CarsSlider />
+                <CarsSlider CarsDataCMS={CarsDataCMS} />
               </motion.div>
             </div>
           </div>

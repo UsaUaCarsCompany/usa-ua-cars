@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styles from './popularCarsStyles.module.sass'
 import clsx from 'clsx'
 import { CarsDataProps } from '@/data/CarsData'
+import { urlForImage } from '../../../sanity/lib/image'
 
 type PopularCarsSlideItemProps = {
   car: CarsDataProps
@@ -23,7 +24,7 @@ export const PopularCarsSlideItem = ({
     <>
       <li className={styles.list__cars__cards}>
         <div className={styles.cars__header__block}>
-          <Image src={`/cars/${car.image}.png`} width={500} height={270} alt={car.title.toLowerCase()} />
+          <Image src={urlForImage(car.image)} width={500} height={270} alt={car.image.alt.toLowerCase()} />
         </div>
         <div className={styles.cars__content}>
           <div className={styles.content__header}>

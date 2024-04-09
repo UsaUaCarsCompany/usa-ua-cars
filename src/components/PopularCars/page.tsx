@@ -10,17 +10,21 @@ import IwantPopup from './IwantPopup/IwantPopup'
 import { useLanguage } from '@/ContextLanguage/LanguageContext'
 import { motion } from 'framer-motion'
 import { bottomAnimations, opacityAnimations } from '@/animations/page'
-import { CarsData, CarsDataProps } from '@/data/CarsData'
+import { CarsDataProps } from '@/data/CarsData'
+
+interface PropsOfDataCars {
+  CarsDataCMS: CarsDataProps[]
+}
 
 const chunk = (arr: CarsDataProps[], size: number) =>
   Array.from({ length: Math.ceil(arr.length / size) }, (v, i) => arr.slice(i * size, i * size + size))
 
-const PopularCarsSlider = () => {
+const PopularCarsSlider = ({ CarsDataCMS }: PropsOfDataCars) => {
   const [openWantPopup, setOpenWantPopup] = useState(false)
   const [selectedCar, setSelectedCar] = useState<CarsDataProps | null>(null)
   const { language, switchLanguage } = useLanguage()
 
-  const carsChunks = chunk(CarsData, 4)
+  const carsChunks = chunk(CarsDataCMS, 4)
 
   const handleSelectCar = (car: CarsDataProps, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()

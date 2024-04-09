@@ -7,14 +7,18 @@ import dynamic from 'next/dynamic'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import { Navigation } from 'swiper/modules'
-import { VideosReviewsDataProps, VideosReviewsData } from '@/data/VideosReviewsData'
+import { VideosReviewsDataProps } from '@/data/VideosReviewsData'
 import { useLanguage } from '@/ContextLanguage/LanguageContext'
 import { motion } from 'framer-motion'
 import { leftAnimations, rightAnimations } from '@/animations/page'
 
 const DynamicReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
-export const VideoPlayer = () => {
+interface PropsOfVideos {
+  VideosDataCMS: VideosReviewsDataProps[]
+}
+
+export const VideoPlayer = ({ VideosDataCMS }: PropsOfVideos) => {
   const { language, switchLanguage } = useLanguage()
 
   return (
@@ -30,7 +34,7 @@ export const VideoPlayer = () => {
         <div className="container">
           <div className={styles.inner__title}>
             <motion.h3 variants={rightAnimations} custom={2}>
-              {language === 'ua' ? 'Відгуки наших клієнтів' : 'Отзывы наших клиентов'} ({VideosReviewsData.length})
+              {language === 'ua' ? 'Відгуки наших клієнтів' : 'Отзывы наших клиентов'} ({VideosDataCMS.length})
             </motion.h3>
             <motion.span variants={rightAnimations} custom={2.2} />
           </div>
@@ -47,27 +51,28 @@ export const VideoPlayer = () => {
             spaceBetween={20}
             className="VideoPlayer"
           >
-            {VideosReviewsData.map(({ ...review }: VideosReviewsDataProps) => (
-              <SwiperSlide key={review.id}>
-                <div className={styles.player__block_card}>
-                  <div className={styles.video__player}>
-                    <DynamicReactPlayer
-                      controls={true}
-                      light={true}
-                      width="100%"
-                      height="300px"
-                      url={review.urlVideo}
-                    />
+            {VideosDataCMS?.length > 0 &&
+              VideosDataCMS?.map(({ ...reviewVideo }) => (
+                <SwiperSlide key={reviewVideo.id}>
+                  <div className={styles.player__block_card}>
+                    <div className={styles.video__player}>
+                      <DynamicReactPlayer
+                        controls={true}
+                        light={true}
+                        width="100%"
+                        height="300px"
+                        url={reviewVideo.urlVideo}
+                      />
+                    </div>
+                    <div className={styles.player__content}>
+                      <h5 className={styles.content__title}>{reviewVideo.title}</h5>
+                      <p className={styles.content__subtitle}>
+                        {language === 'ua' ? reviewVideo.subtitle.subtitle_ua : reviewVideo.subtitle.subtitle_ru}
+                      </p>
+                    </div>
                   </div>
-                  <div className={styles.player__content}>
-                    <h5 className={styles.content__title}>{review.title}</h5>
-                    <p className={styles.content__subtitle}>
-                      {language === 'ua' ? review.subtitle.subtitle_ua : review.subtitle.subtitle_ru}
-                    </p>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
+                </SwiperSlide>
+              ))}
           </Swiper>
         </div>
       </motion.div>
