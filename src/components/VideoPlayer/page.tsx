@@ -11,6 +11,7 @@ import { VideosReviewsDataProps } from '@/data/VideosReviewsData'
 import { useLanguage } from '@/ContextLanguage/LanguageContext'
 import { motion } from 'framer-motion'
 import { leftAnimations, rightAnimations } from '@/animations/page'
+import { urlForImage } from '../../../sanity/lib/image'
 
 const DynamicReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
@@ -58,7 +59,7 @@ export const VideoPlayer = ({ VideosDataCMS }: PropsOfVideos) => {
                     <div className={styles.video__player}>
                       <DynamicReactPlayer
                         controls={true}
-                        light={true}
+                        light={<img src={urlForImage(reviewVideo.preview)} alt={reviewVideo.preview.alt} />}
                         width="100%"
                         height="300px"
                         url={reviewVideo.urlVideo}
