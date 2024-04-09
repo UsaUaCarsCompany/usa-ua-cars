@@ -8,6 +8,7 @@ import { VideoPlayer } from '@/components/VideoPlayer/page'
 import { client } from '../../sanity/lib/client'
 import { CarsDataProps } from '@/data/CarsData'
 import { VideosReviewsDataProps } from '@/data/VideosReviewsData'
+import { GetServerSideProps } from 'next'
 
 interface PropsHomeGetsData {
   CarsDataCMS: CarsDataProps[]
@@ -28,7 +29,7 @@ const Home = ({ CarsDataCMS, VideosDataCMS }: PropsHomeGetsData) => {
   )
 }
 
-Home.getInitialProps = async () => {
+export const getServerSideProps: GetServerSideProps<PropsHomeGetsData> = async () => {
   const getCars = async () => {
     const query = `
     *[_type == "cars"] | order(createdAt desc) {
@@ -67,7 +68,7 @@ Home.getInitialProps = async () => {
   const CarsDataCMS: CarsDataProps[] = await getCars()
   const VideosDataCMS: VideosReviewsDataProps[] = await getVideos()
 
-  return { CarsDataCMS, VideosDataCMS }
+  return { props: { CarsDataCMS, VideosDataCMS } }
 }
 
 export default Home
