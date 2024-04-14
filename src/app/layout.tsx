@@ -10,6 +10,7 @@ import Header from '@/components/Header/page'
 import Footer from '@/components/Footer/page'
 import { LanguageProvider } from '@/ContextLanguage/LanguageContext'
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata = {
   title: 'USA-UA CARS: Авто з США легко, безпечно та вигідно!',
@@ -56,6 +57,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             <Header />
             {children}
             <Analytics />
+            <SpeedInsights />
             <Footer />
           </LanguageProvider>
         </div>
