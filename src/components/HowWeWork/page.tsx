@@ -31,11 +31,9 @@ const HowWeWork = () => {
               <div className={styles.card__content}>
                 <div className={styles.content__icon}>
                   <Image src={`/work/${work.image}.png`} width={45} height={45} alt={work.title.ua} />
-                  <div className={styles.content__title}>{language === 'ua' ? work.title.ua : work.title.ru}</div>
+                  <h3 className={styles.content__title}>{language === 'ua' ? work.title.ua : work.title.ru}</h3>
                 </div>
-                <div className={styles.content__subtitle}>
-                  {language === 'ua' ? work.subtitle.ua : work.subtitle.ru}
-                </div>
+                <p className={styles.content__subtitle}>{language === 'ua' ? work.subtitle.ua : work.subtitle.ru}</p>
               </div>
             </motion.div>
           ))}

@@ -289,11 +289,11 @@ export const CarCustomsCalculator: React.FC = () => {
     <div className={styles.calc__block} id="Clearance">
       <div className="container">
         <motion.div viewport={{ once: true }} initial="hidden" whileInView="visible" className={styles.calc__header}>
-          <motion.h1 variants={bottomAnimations} custom={1}>
+          <motion.h2 variants={bottomAnimations} custom={1}>
             {language === 'ua'
               ? 'Калькулятор доставки та розмитнення авто із США в Україну'
               : 'Калькулятор доставки и растаможки авто из США в Украину'}
-          </motion.h1>
+          </motion.h2>
           <div className={styles.calc__subtitle__pic}>
             <motion.span variants={bottomAnimations} custom={1.2}>
               {language === 'ua'

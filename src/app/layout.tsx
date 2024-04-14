@@ -12,7 +12,7 @@ import { LanguageProvider } from '@/ContextLanguage/LanguageContext'
 import { Analytics } from '@vercel/analytics/react'
 
 export const metadata = {
-  title: 'USA-UA CARS',
+  title: 'USA-UA CARS: Авто з США легко, безпечно та вигідно!',
   description:
     'Купити авто з США з USA-UA CARS - легко, безпечно та вигідно! Пошук та підбір авто по вашому бюджету. Доставка авто з США. Оформлення документів.',
   keywords: [
@@ -24,7 +24,7 @@ export const metadata = {
     'розмитнення авто з США',
     'підбір авто з США',
   ],
-  canonicalUrl: 'https://usa-ua-cars.com/',
+  canonicalUrl: 'https://www.usa-ua-cars.com/',
   icons: {
     icon: {
       url: '/logo/favicon-32x32.png',
@@ -45,6 +45,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png" />
         <link rel="manifest" href="/logo/site.webmanifest" />
         <link rel="mask-icon" href="/logo/safari-pinned-tab.svg" color="#202124" />
+        <link rel="canonical" href={metadata.canonicalUrl} />
         <meta name="msapplication-TileColor" content="#202124" />
         <meta name="theme-color" content="#ffffff" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
