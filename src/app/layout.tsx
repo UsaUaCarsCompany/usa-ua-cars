@@ -9,6 +9,7 @@ import Head from 'next/head'
 import Header from '@/components/Header/page'
 import Footer from '@/components/Footer/page'
 import { LanguageProvider } from '@/ContextLanguage/LanguageContext'
+import { Analytics } from '@vercel/analytics/react'
 
 export const metadata = {
   title: 'USA-UA CARS',
@@ -53,6 +54,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           <LanguageProvider>
             <Header />
             {children}
+            <Analytics />
             <Footer />
           </LanguageProvider>
         </div>
