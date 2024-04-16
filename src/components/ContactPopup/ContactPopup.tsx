@@ -210,6 +210,23 @@ const ContactPopup = ({ openContact, setOpenContact, language }: ContactPopupPro
                   </li>
                 ))}
               </ul>
+              <h4>{language === 'ua' ? 'Контакти:' : 'Контакты:'}</h4>
+              <ul className={styles.contacts__phones}>
+                <li className={styles.phoneLink}>
+                  <a href="tel:+380680989080">+380680989080</a>
+                </li>
+                <li className={styles.phoneLink}>
+                  <a href="tel:+380934851357">+380934851357</a>
+                </li>
+                <li className={styles.phoneLink}>
+                  <a href="tel:+380972977936">+380972977936</a>
+                </li>
+              </ul>
+
+              <h4>{language === 'ua' ? 'Емайл:' : 'Емайл:'}</h4>
+              <div className={styles.mailLink}>
+                <a href="mailto:usauacars.company@gmail.com">usauacars.company@gmail.com</a>
+              </div>
             </div>
           </div>
         </div>
