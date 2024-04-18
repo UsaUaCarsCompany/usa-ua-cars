@@ -111,6 +111,7 @@ const Intro = ({ CarsDataCMS }: PropsOfDataCars) => {
                   className={styles.searching__content}
                 >
                   <div className={styles.input__options}>
+                    <label htmlFor="car-auction">Виберіть аукціон:</label>
                     <select
                       onChange={chooseWebsite}
                       className={styles.select__options}
@@ -126,6 +127,7 @@ const Intro = ({ CarsDataCMS }: PropsOfDataCars) => {
                     </select>
                   </div>
                   <div className={styles.input__options}>
+                    <label htmlFor="id_brand">Виберіть марку автомобіля:</label>
                     <select onChange={chooseBrand} className={styles.select__options} name="brand" id="id_brand">
                       <option value="" selected={true} disabled>
                         Марка
@@ -138,6 +140,7 @@ const Intro = ({ CarsDataCMS }: PropsOfDataCars) => {
                     </select>
                   </div>
                   <div className={styles.input__options}>
+                    <label htmlFor="id_meta_model">Виберіть модель автомобіля:</label>
                     <select
                       onChange={chooseModel}
                       className={styles.select__options}
@@ -157,6 +160,7 @@ const Intro = ({ CarsDataCMS }: PropsOfDataCars) => {
 
                   <div className={styles.years}>
                     <div className={styles.input__options}>
+                      <label htmlFor="id_year_from">Виберіть рік випуску автомобіля:</label>
                       <select
                         onChange={chooseYearFrom}
                         className={styles.select__options}
@@ -174,6 +178,7 @@ const Intro = ({ CarsDataCMS }: PropsOfDataCars) => {
                       </select>
                     </div>
                     <div className={styles.input__options}>
+                      <label htmlFor="id_year_to">Виберіть рік до:</label>
                       <select
                         onChange={chooseYearTo}
                         className={styles.select__options}

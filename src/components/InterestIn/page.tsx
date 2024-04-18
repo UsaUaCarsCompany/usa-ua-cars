@@ -92,6 +92,9 @@ export const InterestIn = () => {
               <form onSubmit={handleSubmit(onSubmit)} className={styles.card__form__interest}>
                 <h2>{language === 'ua' ? 'Який автомобіль вас цікавить?' : 'Какой автомобиль вас интересует?'}</h2>
                 <div className={styles.input__options}>
+                  <label htmlFor="type_of_goat">
+                    {language === 'ua' ? 'Виберіть тип кузова:' : 'Выберите тип кузова:'}
+                  </label>
                   <select
                     {...register('typeOfGoat', {
                       required: language === 'ua' ? 'Виберіть тип кузова' : 'Выберите тип кузова',
@@ -99,7 +102,7 @@ export const InterestIn = () => {
                     className={styles.select__options}
                     id="type_of_goat"
                   >
-                    <option value="" selected={true} disabled>
+                    <option value="" disabled selected>
                       {language === 'ua' ? 'Тип Кузова' : 'Тип Кузова'}
                     </option>
                     {Goat.map(({ ...goat }: GoatProps) => (
@@ -111,6 +114,9 @@ export const InterestIn = () => {
                   {errors.typeOfGoat && <span className={styles.error_message}>{errors.typeOfGoat.message}</span>}
                 </div>
                 <div className={styles.input__options}>
+                  <label htmlFor="turnkey_budget">
+                    {language === 'ua' ? 'Виберіть бюджет під ключ:' : 'Выберите бюджет под ключ:'}
+                  </label>
                   <select
                     {...register('turnkeyBudget', {
                       required: language === 'ua' ? 'Виберіть бюджет' : 'Выберите бюджет',
@@ -118,7 +124,7 @@ export const InterestIn = () => {
                     className={styles.select__options}
                     id="turnkey_budget"
                   >
-                    <option value="" selected={true} disabled>
+                    <option value="" disabled selected>
                       {language === 'ua' ? 'Бюджет під ключ' : 'Бюджет под ключ'}
                     </option>
                     {Key.map(({ ...key }: KeyProps) => (
@@ -130,6 +136,9 @@ export const InterestIn = () => {
                   {errors.turnkeyBudget && <span className={styles.error_message}>{errors.turnkeyBudget.message}</span>}
                 </div>
                 <div className={styles.input_block}>
+                  <label htmlFor="phone">
+                    {language === 'ua' ? 'Введіть номер мобільного телефону:' : 'Введите номер мобильного телефона:'}
+                  </label>
                   <input
                     {...register('phone', {
                       required:
@@ -143,12 +152,15 @@ export const InterestIn = () => {
                       },
                     })}
                     type="tel"
-                    placeholder="Телефон"
+                    placeholder="Телефон +380111111111"
                     className={clsx(styles.input__field, errors.phone ? styles.input__field__fail : '')}
                   />
                   {errors.phone && <span className={styles.error_message}>{errors.phone.message}</span>}
                 </div>
                 <div className={styles.input_block}>
+                  <label htmlFor="email">
+                    {language === 'ua' ? 'Введіть адресу електронної пошти:' : 'Введите адрес электронной почты:'}
+                  </label>
                   <input
                     {...register('email', {
                       required:

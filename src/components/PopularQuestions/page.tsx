@@ -56,21 +56,20 @@ export const Questions = () => {
                   variants={accord.anim === 'right' ? rightAnimations : leftAnimations}
                   custom={accord.index}
                   key={id}
-                  className={clsx(styles.accordion__block, openAccordions[id] ? styles.accordion__block__active : '')}
+                  className={clsx(styles.accordion__block, openAccordions[id] && styles.accordion__block__active)}
                 >
                   <div className={styles.accordion_heading} onClick={() => toggleHandler(id)}>
                     <h3>{language === 'ua' ? accord.title.ua : accord.title.ru}</h3>
-
-                    <button className={styles.accordion_icon} onClick={() => toggleHandler(id)}>
+                    <button className={styles.accordion_icon} aria-label="Accordion arrow">
                       <FontAwesomeIcon
                         icon={faChevronDown}
-                        className={clsx(styles.accordion_arrow)}
-                        onClick={() => toggleHandler(id)}
-                        aria-expanded={openAccordions[id]}
+                        className={clsx(styles.accordion_arrow, openAccordions[id] && styles.aaccordion_arrow__active)}
                       />
                     </button>
                   </div>
-                  <div aria-expanded={openAccordions[id]} className={styles.accordion_content}>
+                  <div
+                    className={clsx(styles.accordion_content, openAccordions[id] && styles.accordion_content__active)}
+                  >
                     <div className={styles.content_container}>
                       <div className={styles.content_text}>{language === 'ua' ? accord.text.ua : accord.text.ru}</div>
                     </div>
