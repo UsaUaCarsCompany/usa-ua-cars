@@ -285,6 +285,17 @@ export const CarCustomsCalculator: React.FC = () => {
     setSummary(Math.round(totalCost))
   }
 
+  const isFormValid = () => {
+    return (
+      selectedAuction &&
+      engineVolume > 0 &&
+      auctionValue > 0 &&
+      vehicleType &&
+      engineType &&
+      (engineType !== 'electric' || (engineType === 'electric' && engineVolume > 0))
+    )
+  }
+
   return (
     <div className={styles.calc__block} id="Clearance">
       <div className="container">
@@ -317,8 +328,8 @@ export const CarCustomsCalculator: React.FC = () => {
             <h2>{language === 'ua' ? 'Вхідні дані' : 'Входные данные'}</h2>
 
             <div className={styles.input__options}>
-              <label>{language === 'ua' ? 'Валюта:' : 'Валюта:'}</label>
-              <select className={styles.select__options} onChange={handleCurrencyChange}>
+              <label htmlFor="currency">{language === 'ua' ? 'Валюта:' : 'Валюта:'}</label>
+              <select id="currency" className={styles.select__options} onChange={handleCurrencyChange}>
                 <option value="USD">$</option>
                 <option value="EUR">€</option>
               </select>
@@ -338,9 +349,8 @@ export const CarCustomsCalculator: React.FC = () => {
             </div>
 
             <div className={styles.input__options}>
-              <label>{language === 'ua' ? 'Аукціон:' : 'Аукцион:'}</label>
-
-              <select className={styles.select__options} onChange={handleAuctionChange}>
+              <label htmlFor="auction">{language === 'ua' ? 'Аукціон:' : 'Аукцион:'}</label>
+              <select id="auction" className={styles.select__options} onChange={handleAuctionChange}>
                 <option value="" disabled selected>
                   {language === 'ua' ? 'Аукціон:' : 'Аукцион:'}
                 </option>
@@ -350,9 +360,12 @@ export const CarCustomsCalculator: React.FC = () => {
             </div>
 
             <div className={styles.input__options}>
-              <label>{language === 'ua' ? 'Тип транспорту:' : 'Тип транспорта:'}</label>
-
-              <select className={styles.select__options} onChange={(e) => setVehicleType(e.target.value)}>
+              <label htmlFor="vehicleType">{language === 'ua' ? 'Тип транспорту:' : 'Тип транспорта:'}</label>
+              <select
+                id="vehicleType"
+                className={styles.select__options}
+                onChange={(e) => setVehicleType(e.target.value)}
+              >
                 <option value="" disabled selected>
                   {language === 'ua' ? 'Виберіть' : 'Выберите'}
                 </option>
@@ -362,9 +375,12 @@ export const CarCustomsCalculator: React.FC = () => {
             </div>
 
             <div className={styles.input__options}>
-              <label>{language === 'ua' ? 'Тип двигуна:' : 'Тип двигателя:'}</label>
-
-              <select className={styles.select__options} onChange={(e) => setEngineType(e.target.value)}>
+              <label htmlFor="engineType">{language === 'ua' ? 'Тип двигуна:' : 'Тип двигателя:'}</label>
+              <select
+                id="engineType"
+                className={styles.select__options}
+                onChange={(e) => setEngineType(e.target.value)}
+              >
                 <option value="" disabled selected>
                   {language === 'ua' ? 'Виберіть' : 'Выберите'}
                 </option>
@@ -376,7 +392,7 @@ export const CarCustomsCalculator: React.FC = () => {
             </div>
 
             <div className={styles.input_block}>
-              <label>
+              <label htmlFor="volume">
                 {engineType === 'electric'
                   ? language === 'ua'
                     ? "Об'єм батареї (кВт*год):"
@@ -403,9 +419,12 @@ export const CarCustomsCalculator: React.FC = () => {
             </div>
 
             <div className={styles.input__options}>
-              <label>{language === 'ua' ? 'Рік випуску авто:' : 'Год выпуска авто:'}</label>
-
-              <select className={styles.select__options} onChange={(e) => setAgeCar(parseInt(e.target.value, 10))}>
+              <label htmlFor="carYear">{language === 'ua' ? 'Рік випуску авто:' : 'Год выпуска авто:'}</label>
+              <select
+                id="carYear"
+                className={styles.select__options}
+                onChange={(e) => setAgeCar(parseInt(e.target.value, 10))}
+              >
                 <option value="" disabled selected>
                   {language === 'ua' ? 'Виберіть' : 'Выберите'}
                 </option>
@@ -416,7 +435,7 @@ export const CarCustomsCalculator: React.FC = () => {
                 ))}
               </select>
             </div>
-            <button onClick={calculateCustoms} className={styles.btn_calc}>
+            <button onClick={calculateCustoms} className={styles.btn_calc} disabled={!isFormValid()}>
               <span>{language === 'ua' ? 'Розрахувати' : 'Рассчитать'}</span>
             </button>
           </div>
