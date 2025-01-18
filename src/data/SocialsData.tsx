@@ -9,21 +9,21 @@ export const SocialsData: SocialsDataProps[] = [
   {
     id: 7823,
     title: 'Telegram',
-    link: '#',
+    link: 'https://t.me/usa_uacars',
     image: 'telega',
   },
 
   {
     id: 1235,
-    title: 'Viber',
-    link: '#',
-    image: 'vibe',
+    title: 'Insta',
+    link: 'https://www.instagram.com/usa_ua_cars_/profilecard/?igsh=MXB3b2thN2NhYzNibQ==',
+    image: 'instagram',
   },
 
   {
     id: 6190,
-    title: 'WhatsApp',
-    link: '#',
-    image: 'app',
+    title: 'Facebook',
+    link: 'https://www.facebook.com/share/19VezdhpiP/?mibextid=wwXIfr',
+    image: 'facebook',
   },
 ]
