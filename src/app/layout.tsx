@@ -41,14 +41,15 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png" />
-        <link rel="manifest" href="/logo/site.webmanifest" />
-        <link rel="mask-icon" href="/logo/safari-pinned-tab.svg" color="#202124" />
+        <link rel="icon" type="image/png" href="logo/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="logo/favicon.svg" />
+        <link rel="shortcut icon" href="logo/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="logo/apple-touch-icon.png" />
+        <meta name="apple-mobile-web-app-title" content="USA-UA CARS" />
+        <link rel="manifest" href="logo/site.webmanifest" />
         <link rel="canonical" href={metadata.canonicalUrl} />
         <meta name="msapplication-TileColor" content="#202124" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#202124" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <body>
